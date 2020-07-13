@@ -6,6 +6,10 @@ module.exports = {
   devtool: 'inline-source-map',
   resolve: {
     extensions: ['.ts', '.tsx', '.js'],
+    alias: {
+      components: path.resolve(__dirname, 'src/components/'),
+      containers: path.resolve(__dirname, 'src/containers/'),
+    },
   },
   output: {
     path: path.join(__dirname, '/dist'),
@@ -17,6 +21,10 @@ module.exports = {
         test: /\.tsx?$/,
         loader: 'ts-loader',
         exclude: /node_modules/,
+      },
+      {
+        test: /\.(png|svg|jpg|gif)$/,
+        use: ['file-loader'],
       },
     ],
   },

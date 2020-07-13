@@ -9,11 +9,14 @@
     "allowSyntheticDefaultImports": true,
     "jsx": "react",
     "allowJs": true,
-    "baseUrl": "./",
+    "baseUrl": "./src",
     "outDir": "./dist",
     "paths": {
-      "components/*": ["src/components/*"]
+      "components/*": ["components/*"],
+      "containers/*": ["containers"]
     },
+    "typeRoots": ["./src/types"]
   },
-  "include": ["./src"]
+  "include": ["./src"],
+  "exclude": ["./src/types"]
 }
