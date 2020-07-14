@@ -1,4 +1,4 @@
-import NpcCatTexture from './assets/npc-cat-tileSheet.png';
+import { npcCatTexture } from './assets';
 
 export default [
   {
@@ -8,7 +8,7 @@ export default [
       speedY: 8,
     },
     texture: {
-      source: NpcCatTexture,
+      source: npcCatTexture,
       height: 64,
       width: 64,
       tileCols: 3,

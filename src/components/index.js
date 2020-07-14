@@ -1,1 +1,1 @@
-export { Game } from './Game';
+export { Sidebar } from './Sidebar';

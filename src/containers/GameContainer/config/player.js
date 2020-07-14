@@ -1,4 +1,4 @@
-import PlayerTexture from './assets/player-tile-sheet.png';
+import { playerTexture } from './assets';
 
 export default {
   name: 'player',
@@ -7,7 +7,7 @@ export default {
     speedY: 8,
   },
   texture: {
-    source: PlayerTexture,
+    source: playerTexture,
     height: 200,
     width: 100,
     tileCols: 8,

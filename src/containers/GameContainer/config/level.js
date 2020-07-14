@@ -1,4 +1,4 @@
-import LevelTileSheet from './assets/level-tile-sheet.png';
+import { levelTileSheet } from './assets';
 
 const SPAWN_MARKER = 'x';
 const TILES_PER_ROW = 11;
@@ -86,7 +86,7 @@ export default {
   layout: LEVEL_LAYOUT,
   spawnMarker: SPAWN_MARKER,
   tileSheet: {
-    src: LevelTileSheet,
+    src: levelTileSheet,
     tilesPerRow: TILES_PER_ROW,
     spriteSize: TILESHEET_SPRITE_SIZE,
     width: TILESHEET_WIDTH,
@@ -98,4 +98,4 @@ export default {
       climbable: TILES_CLIMBABLE,
     }
   },
-}
+};

@@ -13,11 +13,22 @@ const StyledCanvas = styled('canvas')`
 
 interface GameWrapperProps {
   onLoadGame: () => void;
+  onOpenTab: (tab: string) => void;
 }
 
-interface Event {}
+interface Event {
+  text: string;
+  image: string;
+  onClick?: {
+    text: string;
+    clickHandler: () => void;
+  };
+}
 
-const GameWrapper: React.FC<GameWrapperProps> = ({ onLoadGame }) => {
+const GameContainer: React.FC<GameWrapperProps> = ({
+  onLoadGame,
+  onOpenTab,
+}) => {
   const canvasRef = React.useRef();
   const [activeEvent, setActiveEvent] = React.useState<Event>(null);
 
@@ -27,10 +38,7 @@ const GameWrapper: React.FC<GameWrapperProps> = ({ onLoadGame }) => {
         player: config.player,
         npc: config.npc,
         level: config.level,
-        events: config.events(
-          (event: Object) => setActiveEvent(event),
-          () => setActiveEvent(null)
-        ),
+        events: config.events(onOpenTab, setActiveEvent),
         canvas: canvasRef.current,
       },
       {
@@ -40,11 +48,11 @@ const GameWrapper: React.FC<GameWrapperProps> = ({ onLoadGame }) => {
   }, [canvasRef]);
 
   return (
-    <div>
+    <React.Fragment>
       <TextBox event={activeEvent} />
       <StyledCanvas ref={canvasRef} />
-    </div>
+    </React.Fragment>
   );
 };
 
-export default GameWrapper;
+export default GameContainer;

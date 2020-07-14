@@ -1,1 +1,2 @@
-export { Page } from './Page';
+export { PageContainer } from './PageContainer';
+export { GameContainer } from './GameContainer';

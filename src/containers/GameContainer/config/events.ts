@@ -1,43 +1,49 @@
-import PlayerTextureLeveled from './assets/player-tile-sheet-leveled.png';
-import playerImage from './assets/animation-player.gif';
-import catImage from './assets/animation-cat.gif';
-import workerImage from './assets/animation-worker.gif';
-import roboImage from './assets/animation-robo.gif';
+import {
+  playerTextureLeveled,
+  playerImage,
+  catImage,
+  workerImage,
+  roboImage,
+} from './assets';
 
-const updateTextBox = ({ text, image, shouldUpdate }, siteAction) => () => {
-  // const textBoxWrapper = document.getElementById('textBoxWrapper');
-  const textBox = document.getElementById('textBox');
-  // const imageBox = document.getElementById('textBoxImage');
-  // const textBoxButton = document.getElementById('textBoxButton');
-
-  if (textBoxWrapper.className !== 'open' || shouldUpdate) {
-    // textBoxWrapper.className = 'open';
-    textBox.innerHTML = text;
-    // imageBox.src = image;
-
-    // if (siteAction) {
-    //   textBoxButton.classList.add('visible');
-    //   textBoxButton.innerHTML = siteAction.name;
-    //   textBoxButton.onclick = siteAction.callback;
-    // } else {
-    //   textBoxButton.classList.remove('visible');
-    // }
-  }
+type Event = {
+  text: string;
+  image: string;
+  onClick?: {
+    text: string;
+    clickHandler: () => void;
+  };
 };
 
-const GAME_EVENTS = {
-  levelUp: ({ player }) =>
-    player.levelUp(PlayerTextureLeveled, {
-      tileCols: 3,
-      canFly: true,
-      speedX: 20,
-      speedY: 20,
-    }),
-  enableControls: ({ player }) => player.enableControls(),
-  disableControls: ({ player }) => player.disableControls(),
+type EventConfiguration = {
+  id: string;
+  row: [number, number];
+  col: [number, number];
+  eventHandler: (playerReference: { canFly: boolean }) => void;
+  onLeave: () => void;
 };
 
-const getEventConfig = ({ game, page }) => (gameObjects) => [
+type PageActions = {
+  setEvent: (event: Event) => void;
+  clearEvent: () => void;
+  openTab: (tab: string) => void;
+};
+
+type GameActions = {
+  levelUp: (gameObjects: any) => void;
+  enableControls: (gameObjects: any) => void;
+  disableControls: (gameObjects: any) => void;
+};
+
+type Actions = {
+  page: PageActions;
+  game: GameActions;
+};
+
+type EventsConfig = (params: any) => EventConfiguration[];
+type GetEventsConfig = (actions: Actions) => EventsConfig;
+
+const getEventConfig: GetEventsConfig = ({ game, page }) => (gameObjects) => [
   {
     id: 'initialEvent',
     row: [41, 41],
@@ -59,8 +65,8 @@ const getEventConfig = ({ game, page }) => (gameObjects) => [
           'I think that someone has told me that architects make great developers.',
         image: playerImage,
         onClick: {
-          name: 'About',
-          callback: () => page.openTab('contentAbout'),
+          text: 'About',
+          clickHandler: () => page.openTab('contentAbout'),
         },
       }),
     onLeave: page.clearEvent,
@@ -85,8 +91,8 @@ const getEventConfig = ({ game, page }) => (gameObjects) => [
         text: 'Hmmm... Not too bad! I think that I should come back later.',
         image: playerImage,
         onClick: {
-          name: 'Portfolio',
-          callback: () => page.openTab('contentPortfolio'),
+          text: 'Portfolio',
+          clickHandler: () => page.openTab('contentPortfolio'),
         },
       }),
     onLeave: page.clearEvent,
@@ -101,8 +107,8 @@ const getEventConfig = ({ game, page }) => (gameObjects) => [
           '"In case of fire - git add -A, git commit -m "FIRE!", git push origin HEAD --force"',
         image: playerImage,
         onClick: {
-          name: 'Github',
-          callback: () => {
+          text: 'Github',
+          clickHandler: () => {
             window.open('https://github.com/lkatkus', '_blank');
           },
         },
@@ -119,8 +125,8 @@ const getEventConfig = ({ game, page }) => (gameObjects) => [
           'Autocad, Archicad, 3DS MAX, Photoshop, Illustrator, Nikon, Aperture, Bokeh and etc. Lots of fancy words, huh?',
         image: playerImage,
         onClick: {
-          name: 'Other',
-          callback: () => page.openTab('contentOther'),
+          text: 'Other',
+          clickHandler: () => page.openTab('contentOther'),
         },
       }),
     onLeave: page.clearEvent,
@@ -138,55 +144,66 @@ const getEventConfig = ({ game, page }) => (gameObjects) => [
     col: [10, 13],
     eventHandler: (playerRef) => {
       if (playerRef.canFly) {
-        updateTextBox({
+        page.setEvent({
           text:
             '01010100 01101000 01100001 01101110 01101011 00100000 01111001 01101111 01110101 00100000 01100110 01101111 01110010 00100000 01110110 01101001 01110011 01101001 01110100 01101001 01101110 01100111 00100000 01101101 01111001 00100000 01110111 01100101 01100010 01110011 01101001 01110100 01100101 00100001',
           image: roboImage,
-        })();
+        });
       } else {
-        updateTextBox(
-          {
-            text:
-              'That thing looks interesting...? It seems to be REACTing to something.',
-            image: playerImage,
-          },
-          {
-            name: 'Touch the strange thing',
-            callback: () => {
+        page.setEvent({
+          text:
+            'That thing looks interesting...? It seems to be REACTing to something.',
+          image: playerImage,
+          onClick: {
+            text: 'Touch the strange thing',
+            clickHandler: () => {
               game.levelUp(gameObjects);
               game.disableControls(gameObjects);
 
-              updateTextBox(
-                {
-                  text:
-                    'What is this new power, that i feel?! Virtual DOM, Hooks, Redux, GraphQL, Node!',
-                  image: roboImage,
-                  shouldUpdate: true,
-                },
-                {
-                  name: 'Try out this new power!',
-                  callback: () => {
+              page.setEvent({
+                text:
+                  'What is this new power, that i feel?! Virtual DOM, Hooks, Redux, GraphQL, Node!',
+                image: roboImage,
+                onClick: {
+                  text: 'Try out this new power!',
+                  clickHandler: () => {
                     game.enableControls(gameObjects);
 
                     page.clearEvent();
                   },
-                }
-              )();
+                },
+              });
             },
-          }
-        )();
+          },
+        });
       }
     },
     onLeave: page.clearEvent,
   },
 ];
 
-export default function (setEvent, clearEvent) {
+const GAME_EVENTS = {
+  levelUp: ({ player }) =>
+    player.levelUp(playerTextureLeveled, {
+      tileCols: 3,
+      canFly: true,
+      speedX: 20,
+      speedY: 20,
+    }),
+  enableControls: ({ player }) => player.enableControls(),
+  disableControls: ({ player }) => player.disableControls(),
+};
+
+export default (
+  openTab: (tab: string) => void,
+  setEvent: (event: Event) => void
+): EventsConfig => {
   return getEventConfig({
     game: GAME_EVENTS,
     page: {
+      openTab,
       setEvent,
-      clearEvent,
+      clearEvent: () => setEvent(null),
     },
   });
-}
+};

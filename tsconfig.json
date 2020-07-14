@@ -13,7 +13,8 @@
     "outDir": "./dist",
     "paths": {
       "components/*": ["components/*"],
-      "containers/*": ["containers"]
+      "containers/*": ["containers/*"],
+      "pages/*": ["pages/*"]
     },
     "typeRoots": ["./src/types"]
   },
