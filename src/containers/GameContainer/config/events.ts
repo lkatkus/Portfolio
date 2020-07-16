@@ -66,7 +66,7 @@ const getEventConfig: GetEventsConfig = ({ game, page }) => (gameObjects) => [
         image: playerImage,
         onClick: {
           text: 'About',
-          clickHandler: () => page.openTab('contentAbout'),
+          clickHandler: () => page.openTab('about'),
         },
       }),
     onLeave: page.clearEvent,
@@ -92,7 +92,7 @@ const getEventConfig: GetEventsConfig = ({ game, page }) => (gameObjects) => [
         image: playerImage,
         onClick: {
           text: 'Portfolio',
-          clickHandler: () => page.openTab('contentPortfolio'),
+          clickHandler: () => page.openTab('portfolio'),
         },
       }),
     onLeave: page.clearEvent,
@@ -126,7 +126,7 @@ const getEventConfig: GetEventsConfig = ({ game, page }) => (gameObjects) => [
         image: playerImage,
         onClick: {
           text: 'Other',
-          clickHandler: () => page.openTab('contentOther'),
+          clickHandler: () => page.openTab('other'),
         },
       }),
     onLeave: page.clearEvent,

@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import { Sidebar } from 'components';
+import { Sidebar, Content } from 'components';
 
 const StyledPageContainer = styled('div')`
   width: 100%;
@@ -25,21 +25,28 @@ const ChildrenContainer = styled('div')`
 
 interface PageWrapperProps {
   children: any;
-  sidebarConfig: any[];
-  contentConfig: any[];
+  config: any[];
 }
 
-const PageContainer: React.FC<PageWrapperProps> = ({
-  children,
-  sidebarConfig,
-}) => {
-  const [activeTab, setActiveTab] = React.useState<string>(null);
+const PageContainer: React.FC<PageWrapperProps> = ({ children, config }) => {
+  const [activeTab, setActiveTab] = React.useState<any>(null);
 
   return (
     <StyledPageContainer>
       <ContentContainer>
-        <Sidebar config={sidebarConfig} openTab={setActiveTab} />
-        <div>{activeTab}</div>
+        <Sidebar
+          activeTab={activeTab}
+          config={config}
+          openTab={setActiveTab}
+          closeTab={() => {
+            setActiveTab(null);
+          }}
+        />
+        <Content
+          config={config}
+          activeTab={activeTab}
+          closeTab={() => setActiveTab(null)}
+        />
       </ContentContainer>
 
       <ChildrenContainer>
