@@ -1,10 +1,15 @@
 import React from 'react';
 import styled from 'styled-components';
 
+import { Button, Icons } from 'components';
+
 const StyledContentBox = styled('div')`
   flex: 1;
   z-index: 10;
-  background-color: green;
+  padding: 10px 20px;
+  display: flex;
+  flex-direction: column;
+  background-color: rgb(240, 245, 245);
 `;
 
 interface ContentBoxProps {
@@ -14,7 +19,9 @@ interface ContentBoxProps {
 
 const ContentBox: React.FC<ContentBoxProps> = ({ children, closeTab }) => (
   <StyledContentBox>
-    <div onClick={closeTab}>Close</div>
+    <Button onClick={closeTab}>
+      <Icons.ArrowRight />
+    </Button>
     {children}
   </StyledContentBox>
 );

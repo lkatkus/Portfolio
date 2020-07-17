@@ -1,2 +1,3 @@
-export { Sidebar } from './Sidebar';
-export { Content } from './Content';
+export { Text } from './Text/index.ts';
+export { Button } from './Button';
+export { default as Icons } from './Icons';

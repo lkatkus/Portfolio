@@ -1,0 +1,20 @@
+import styled from 'styled-components';
+
+export default styled('button')`
+  padding: 0;
+  border: none;
+  outline: none;
+  background: rgba(255, 255, 255, 0);
+  display: inline-flex;
+  cursor: pointer;
+  transition: all;
+  transition-duration: 200ms;
+
+  &:hover {
+    background-color: rgba(240, 245, 245, 1);
+  }
+
+  &:active {
+    background-color: rgba(224, 235, 235, 1);
+  }
+`;

@@ -1,13 +1,19 @@
 import React from 'react';
 import styled from 'styled-components';
 
+import { Button, Icons, Text } from 'components';
+
 const SidebarWrapper = styled('div')`
-  background-color: red;
+  background-color: white;
+  padding: 10px 20px;
   z-index: 10;
+  display: flex;
+  flex-direction: column;
 `;
 
-const SidebarOption = styled('div')`
-  padding: 10px;
+const ButtonWrapper = styled('div')`
+  display: flex;
+  justify-content: flex-end;
 `;
 
 interface SidebarProps {
@@ -33,27 +39,33 @@ const Sidebar: React.FC<SidebarProps> = ({
 
   return visible ? (
     <SidebarWrapper>
-      <SidebarOption
-        onClick={() => {
-          closeTab();
-          setVisible(false);
-        }}
-      >
-        Close
-      </SidebarOption>
+      <ButtonWrapper>
+        <Button
+          onClick={() => {
+            closeTab();
+            setVisible(false);
+          }}
+        >
+          <Icons.ArrowLeft />
+        </Button>
+      </ButtonWrapper>
       {config.map((option) => (
-        <SidebarOption
+        <Button
           key={option.key}
           onClick={() => {
             option.content ? openTab(option.key) : option.onClick();
           }}
         >
-          {option.label}
-        </SidebarOption>
+          <Text.Heading>{option.label}</Text.Heading>
+        </Button>
       ))}
     </SidebarWrapper>
   ) : (
-    <div onClick={() => setVisible(true)}>Open</div>
+    <div>
+      <Button onClick={() => setVisible(true)}>
+        <Icons.Burger />
+      </Button>
+    </div>
   );
 };
 
