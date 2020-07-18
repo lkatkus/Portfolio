@@ -1,13 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-
-const TextBase = styled<any>('div')`
-  color: ${({ color }) => color};
-  font-size: ${({ fontSize }) => (fontSize ? `${fontSize}px` : undefined)};
-  line-height: ${({ lineHeight }) => (lineHeight ? `${lineHeight}px` : undefined)};
-  font-family: ${({ fontFamily }) => (fontFamily ? fontFamily : undefined)};
-  text-transform: ${({ uppercase }) => (uppercase ? 'uppercase' : undefined)};
-`;
+import { space, SpaceProps } from 'styled-system';
 
 interface TextProps {
   fontFamily?: string;
@@ -15,12 +8,26 @@ interface TextProps {
   lineHeight?: number;
   color?: string;
   uppercase?: boolean;
+  textAlign?: string;
 }
 
-export default (element: string, props: TextProps): React.FC<any> => ({
-  children,
-}) => (
-  <TextBase as={element as any} {...props}>
+const TextBase = styled.div<TextProps>`
+  color: ${({ color }) => color};
+  font-size: ${({ fontSize }) => (fontSize ? `${fontSize}px` : undefined)};
+  line-height: ${({ lineHeight }) =>
+    lineHeight ? `${lineHeight}px` : undefined};
+  font-family: ${({ fontFamily }) => (fontFamily ? fontFamily : undefined)};
+  text-transform: ${({ uppercase }) => (uppercase ? 'uppercase' : undefined)};
+  text-align: ${({ textAlign }) => (textAlign ? textAlign : undefined)};
+
+  ${space}
+`;
+
+export default (
+  element: string,
+  baseProps: TextProps
+): React.FC<SpaceProps> => ({ children, ...props }) => (
+  <TextBase as={element as any} {...baseProps} {...props}>
     {children}
   </TextBase>
 );

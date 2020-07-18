@@ -14,6 +14,7 @@ const SidebarWrapper = styled('div')`
 const ButtonWrapper = styled('div')`
   display: flex;
   justify-content: flex-end;
+  margin-bottom: 10px;
 `;
 
 interface SidebarProps {
@@ -55,8 +56,10 @@ const Sidebar: React.FC<SidebarProps> = ({
           onClick={() => {
             option.content ? openTab(option.key) : option.onClick();
           }}
+          active={option.key === activeTab}
+          padding='5px 10px'
         >
-          <Text.Heading>{option.label}</Text.Heading>
+          <Text.Heading2>{option.label}</Text.Heading2>
         </Button>
       ))}
     </SidebarWrapper>

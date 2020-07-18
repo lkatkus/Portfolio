@@ -14,7 +14,8 @@
     "paths": {
       "components/*": ["components/*"],
       "containers/*": ["containers/*"],
-      "pages/*": ["pages/*"]
+      "pages/*": ["pages/*"],
+      "assets/*": ["assets/*"]
     },
     "typeRoots": ["./src/types"]
   },

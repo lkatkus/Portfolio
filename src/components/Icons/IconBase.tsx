@@ -5,13 +5,22 @@ interface IconProps {
   size?: number;
 }
 
+interface BaseProps {
+  viewBox?: string;
+}
+
 const defaultProps = {
   size: 20,
 };
 
-export default (Icon: React.FC): React.FC<IconProps> => {
+export default (Icon: React.FC, baseProps: BaseProps): React.FC<IconProps> => {
   const WithBase = ({ size, color }) => (
-    <svg viewBox='0 0 40 40' width={size} height={size} fill={color}>
+    <svg
+      viewBox={baseProps?.viewBox || '0 0 40 40'}
+      width={size}
+      height={size}
+      fill={color}
+    >
       <Icon />
     </svg>
   );
