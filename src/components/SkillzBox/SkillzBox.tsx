@@ -17,12 +17,16 @@ const SkillIndicator = styled.div<{ color: string; width?: number }>`
     width ? 'border-radius: 5px 0 0 5px;' : 'border-radius: 0 5px 5px 0;'}
 `;
 
-const ActualSkill: React.FC<{ color: string }> = ({ color }) => (
-  <ActualSkillWrapper>
-    <SkillIndicator color={color} width={Math.floor(Math.random() * 100)} />
-    <SkillIndicator color={color} />
-  </ActualSkillWrapper>
-);
+const ActualSkill: React.FC<{ color: string }> = ({ color }) => {
+  const skill = Math.floor(Math.random() * 100);
+
+  return (
+    <ActualSkillWrapper>
+      <SkillIndicator color={color} width={skill > 0 ? skill : 1} />
+      <SkillIndicator color={color} />
+    </ActualSkillWrapper>
+  );
+};
 
 const SkillzBoxWrapper = styled.div`
   ${space}

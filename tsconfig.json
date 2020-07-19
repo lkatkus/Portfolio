@@ -15,7 +15,8 @@
       "components/*": ["components/*"],
       "containers/*": ["containers/*"],
       "pages/*": ["pages/*"],
-      "assets/*": ["assets/*"]
+      "assets/*": ["assets/*"],
+      "hooks/*": ["hooks/*"]
     },
     "typeRoots": ["./src/types"]
   },

@@ -1,26 +1,16 @@
 import React from 'react';
 import { Flex, Box } from '@rebass/grid';
 
-import { Button, Text, Icons, SkillzBox } from 'components';
+import { Text, SkillzBox } from 'components';
 import Player from 'assets/images/animation-player.gif';
-
-const skills = [
-  'HTML',
-  'JavaScript',
-  'TypeScript',
-  'Node',
-  'React',
-  'GraphQL',
-  'Jest',
-];
 
 const About: React.FC = () => (
   <Flex flexWrap='wrap'>
-    <Box width={1 / 3}>
-      <img src={Player} />
+    <Box width={[1, 1, 1 / 3]}>
+      <img style={{ width: '100%' }} src={Player} />
     </Box>
 
-    <Box width={2 / 3}>
+    <Box width={[1, 1, 2 / 3]}>
       <Flex flexWrap='wrap'>
         <Box width={1} mb='20px'>
           <Text.Heading1>Laimonas Katkus</Text.Heading1>
@@ -28,6 +18,36 @@ const About: React.FC = () => (
           <Text.Body>Race - Human</Text.Body>
           <Text.Body>Location - Lithuania, Vilnius</Text.Body>
           <Text.Body>Superpower - Brazilian Jiu-Jitsu blue belt</Text.Body>
+        </Box>
+
+        <Box width={1} mb='20px'>
+          <Text.Heading2>Stats</Text.Heading2>
+          <Flex flexWrap='wrap' mb='5px'>
+            <Box width={[0.2, 0.1]}>
+              <Text.Body>HP</Text.Body>
+            </Box>
+            <Box width={[0.8, 0.9]}>
+              <SkillzBox color='crimson' />
+            </Box>
+          </Flex>
+
+          <Flex flexWrap='wrap' mb='5px'>
+            <Box width={[0.2, 0.1]}>
+              <Text.Body>MP</Text.Body>
+            </Box>
+            <Box width={[0.8, 0.9]}>
+              <SkillzBox color='navy' />
+            </Box>
+          </Flex>
+
+          <Flex flexWrap='wrap' mb='5px'>
+            <Box width={[0.2, 0.1]}>
+              <Text.Body>EXP</Text.Body>
+            </Box>
+            <Box width={[0.8, 0.9]}>
+              <SkillzBox color='gold' />
+            </Box>
+          </Flex>
         </Box>
 
         <Box width={1} mb='20px'>
@@ -50,100 +70,6 @@ const About: React.FC = () => (
           <Text.Body mb='10px'>
             Who knows. Get in touch with me, if You think, that we might be
             going in the same direction.
-          </Text.Body>
-        </Box>
-
-        <Box width={1} mb='20px'>
-          <Text.Heading2>Stats</Text.Heading2>
-          <Flex flexWrap='wrap' mb='5px'>
-            <Box width={1 / 10}>
-              <Text.Body>HP</Text.Body>
-            </Box>
-            <Box width={9 / 10}>
-              <SkillzBox color='crimson' />
-            </Box>
-          </Flex>
-
-          <Flex flexWrap='wrap' mb='5px'>
-            <Box width={1 / 10}>
-              <Text.Body>MP</Text.Body>
-            </Box>
-            <Box width={9 / 10}>
-              <SkillzBox color='navy' />
-            </Box>
-          </Flex>
-
-          <Flex flexWrap='wrap' mb='5px'>
-            <Box width={1 / 10}>
-              <Text.Body>EXP</Text.Body>
-            </Box>
-            <Box width={9 / 10}>
-              <SkillzBox color='gold' />
-            </Box>
-          </Flex>
-        </Box>
-
-        <Box width={1} mb='20px'>
-          <Text.Heading2>Emblems</Text.Heading2>
-          <Flex>
-            <Button
-              mr='20px'
-              onClick={() => {
-                window.open('https://github.com/lkatkus', '_blank');
-              }}
-            >
-              <Icons.Github size={40} />
-            </Button>
-            <Button
-              mr='20px'
-              onClick={() => {
-                window.open(
-                  'https://www.linkedin.com/in/laimonas-katkus-ba334071/',
-                  '_blank'
-                );
-              }}
-            >
-              <Icons.LinkedIn size={40} />
-            </Button>
-            <Button
-              mr='20px'
-              onClick={() => {
-                window.open('https://dev.to/lkatkus', '_blank');
-              }}
-            >
-              <Icons.DevTo size={40} />
-            </Button>
-          </Flex>
-        </Box>
-
-        <Box width={1} mb='20px'>
-          <Text.Heading2>Skills*</Text.Heading2>
-
-          {skills.map((skill) => (
-            <SkillzBox
-              mb='5px'
-              key={skill}
-              label={skill}
-              labelComponent={Text.Body}
-            />
-          ))}
-
-          <Text.Body mt='10px'>
-            * People seem to like charts. So this is just a list with randomly
-            generated values. If you want to know more about my experience,
-            let&apos;s get some coffee. I&apos;ll bring donuts.
-          </Text.Body>
-        </Box>
-
-        <Box width={1} mb='20px'>
-          <Text.Heading2>Quests list*</Text.Heading2>
-          <Text.Body>Portfolio - This actual website.</Text.Body>
-          <Text.Body>
-            LaikaJS - 2d game engine with JavaScript and canvas.
-          </Text.Body>
-
-          <Text.Body mt='10px'>
-            * List of stuff that I am working on when I have some free time.
           </Text.Body>
         </Box>
       </Flex>

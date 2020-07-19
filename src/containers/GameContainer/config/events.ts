@@ -92,7 +92,7 @@ const getEventConfig: GetEventsConfig = ({ game, page }) => (gameObjects) => [
         image: playerImage,
         onClick: {
           text: 'Portfolio',
-          clickHandler: () => page.openTab('portfolio'),
+          clickHandler: () => page.openTab('skills'),
         },
       }),
     onLeave: page.clearEvent,
