@@ -3,16 +3,21 @@ import styled from 'styled-components';
 import { Game } from 'laikajs';
 
 import { TextBox } from './TextBox';
+import { TitleScreen } from './TitleScreen';
 import * as config from './config';
 
 const StyledCanvas = styled('canvas')`
   width: 100%;
   height: 100%;
-  background-color: skyblue;
+  background: rgb(255, 255, 255);
+  background: linear-gradient(
+    45deg,
+    rgba(255, 255, 255, 1) 0%,
+    rgba(135, 206, 250, 1) 100%
+  );
 `;
 
 interface GameWrapperProps {
-  onLoadGame: () => void;
   onOpenTab: (tab: string) => void;
 }
 
@@ -25,30 +30,37 @@ interface Event {
   };
 }
 
-const GameContainer: React.FC<GameWrapperProps> = ({
-  onLoadGame,
-  onOpenTab,
-}) => {
+const GameContainer: React.FC<GameWrapperProps> = ({ onOpenTab }) => {
   const canvasRef = React.useRef();
+  const [gameLoaded, setGameLoaded] = React.useState(false);
+  const [shouldLoadGame, setShouldLoadGame] = React.useState(false);
   const [activeEvent, setActiveEvent] = React.useState<Event>(null);
 
   React.useEffect(() => {
-    new Game(
-      {
-        player: config.player,
-        npc: config.npc,
-        level: config.level,
-        events: config.events(onOpenTab, setActiveEvent),
-        canvas: canvasRef.current,
-      },
-      {
-        onLoadGame: onLoadGame,
-      }
-    );
-  }, [canvasRef]);
+    if (shouldLoadGame && canvasRef) {
+      new Game(
+        {
+          player: config.player,
+          npc: config.npc,
+          level: config.level,
+          events: config.events(onOpenTab, setActiveEvent),
+          canvas: canvasRef.current,
+        },
+        {
+          onLoadGame: () => setGameLoaded(true),
+        }
+      );
+    }
+  }, [shouldLoadGame, canvasRef]);
 
   return (
     <React.Fragment>
+      <TitleScreen
+        gameLoaded={gameLoaded}
+        shouldLoadGame={shouldLoadGame}
+        loadGame={() => setShouldLoadGame(true)}
+      />
+
       <TextBox event={activeEvent} />
       <StyledCanvas ref={canvasRef} />
     </React.Fragment>

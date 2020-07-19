@@ -7,16 +7,14 @@ const ActualSkillWrapper = styled.div`
 `;
 
 const SkillIndicator = styled.div<{ color: string; width?: number }>`
-  height: 15px;
+  height: 18px;
   width: ${({ width }) => (width ? `${width}%` : undefined)};
   flex: ${({ width }) => (width ? undefined : 1)};
   background-color: ${({ color }) => color};
   opacity: ${({ width }) => (width ? undefined : 0.4)};
 
   ${({ width }) =>
-    width
-      ? 'border-radius: 5px 0 0 5px;'
-      : 'border-radius: 0 5px 5px 0;'}
+    width ? 'border-radius: 5px 0 0 5px;' : 'border-radius: 0 5px 5px 0;'}
 `;
 
 const ActualSkill: React.FC<{ color: string }> = ({ color }) => (

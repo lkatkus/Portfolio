@@ -13,7 +13,7 @@ export const Text = {
   Heading2: TextBase('h2', {
     fontFamily: 'Press Start',
     fontSize: 16,
-    lineHeight: 32,
+    lineHeight: 40,
     uppercase: true,
   }),
 };

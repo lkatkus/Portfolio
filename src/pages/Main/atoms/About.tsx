@@ -18,41 +18,11 @@ const About: React.FC = () => (
   <Flex flexWrap='wrap'>
     <Box width={1 / 3}>
       <img src={Player} />
-
-      <Flex justifyContent='center'>
-        <Button
-          mx='10px'
-          onClick={() => {
-            window.open('https://github.com/lkatkus', '_blank');
-          }}
-        >
-          <Icons.Github size={40} />
-        </Button>
-        <Button
-          mx='10px'
-          onClick={() => {
-            window.open(
-              'https://www.linkedin.com/in/laimonas-katkus-ba334071/',
-              '_blank'
-            );
-          }}
-        >
-          <Icons.LinkedIn size={40} />
-        </Button>
-        <Button
-          mx='10px'
-          onClick={() => {
-            window.open('https://dev.to/lkatkus', '_blank');
-          }}
-        >
-          <Icons.DevTo size={40} />
-        </Button>
-      </Flex>
     </Box>
 
     <Box width={2 / 3}>
       <Flex flexWrap='wrap'>
-        <Box width={1} mb='15px'>
+        <Box width={1} mb='20px'>
           <Text.Heading1>Laimonas Katkus</Text.Heading1>
           <Text.Body>Class - Software developer</Text.Body>
           <Text.Body>Race - Human</Text.Body>
@@ -60,37 +30,7 @@ const About: React.FC = () => (
           <Text.Body>Superpower - Brazilian Jiu-Jitsu blue belt</Text.Body>
         </Box>
 
-        <Box width={1} mb='15px'>
-          <Text.Heading2>Stats</Text.Heading2>
-          <Flex flexWrap='wrap' mb='10px'>
-            <Box width={1 / 10}>
-              <Text.Body>HP</Text.Body>
-            </Box>
-            <Box width={9 / 10}>
-              <SkillzBox color='crimson' />
-            </Box>
-          </Flex>
-
-          <Flex flexWrap='wrap' mb='10px'>
-            <Box width={1 / 10}>
-              <Text.Body>MP</Text.Body>
-            </Box>
-            <Box width={9 / 10}>
-              <SkillzBox color='navy' />
-            </Box>
-          </Flex>
-
-          <Flex flexWrap='wrap' mb='10px'>
-            <Box width={1 / 10}>
-              <Text.Body>EXP</Text.Body>
-            </Box>
-            <Box width={9 / 10}>
-              <SkillzBox color='gold' />
-            </Box>
-          </Flex>
-        </Box>
-
-        <Box width={1} mb='15px'>
+        <Box width={1} mb='20px'>
           <Text.Heading2>Origins</Text.Heading2>
           <Text.Body mb='10px'>
             Architect and project manager by education. I have worked on
@@ -113,12 +53,75 @@ const About: React.FC = () => (
           </Text.Body>
         </Box>
 
-        <Box width={1} mb='15px'>
-          <Text.Heading2>Skills</Text.Heading2>
+        <Box width={1} mb='20px'>
+          <Text.Heading2>Stats</Text.Heading2>
+          <Flex flexWrap='wrap' mb='5px'>
+            <Box width={1 / 10}>
+              <Text.Body>HP</Text.Body>
+            </Box>
+            <Box width={9 / 10}>
+              <SkillzBox color='crimson' />
+            </Box>
+          </Flex>
+
+          <Flex flexWrap='wrap' mb='5px'>
+            <Box width={1 / 10}>
+              <Text.Body>MP</Text.Body>
+            </Box>
+            <Box width={9 / 10}>
+              <SkillzBox color='navy' />
+            </Box>
+          </Flex>
+
+          <Flex flexWrap='wrap' mb='5px'>
+            <Box width={1 / 10}>
+              <Text.Body>EXP</Text.Body>
+            </Box>
+            <Box width={9 / 10}>
+              <SkillzBox color='gold' />
+            </Box>
+          </Flex>
+        </Box>
+
+        <Box width={1} mb='20px'>
+          <Text.Heading2>Emblems</Text.Heading2>
+          <Flex>
+            <Button
+              mr='20px'
+              onClick={() => {
+                window.open('https://github.com/lkatkus', '_blank');
+              }}
+            >
+              <Icons.Github size={40} />
+            </Button>
+            <Button
+              mr='20px'
+              onClick={() => {
+                window.open(
+                  'https://www.linkedin.com/in/laimonas-katkus-ba334071/',
+                  '_blank'
+                );
+              }}
+            >
+              <Icons.LinkedIn size={40} />
+            </Button>
+            <Button
+              mr='20px'
+              onClick={() => {
+                window.open('https://dev.to/lkatkus', '_blank');
+              }}
+            >
+              <Icons.DevTo size={40} />
+            </Button>
+          </Flex>
+        </Box>
+
+        <Box width={1} mb='20px'>
+          <Text.Heading2>Skills*</Text.Heading2>
 
           {skills.map((skill) => (
             <SkillzBox
-              mb='10px'
+              mb='5px'
               key={skill}
               label={skill}
               labelComponent={Text.Body}
@@ -132,11 +135,15 @@ const About: React.FC = () => (
           </Text.Body>
         </Box>
 
-        <Box width={1} mb='15px'>
-          <Text.Heading2>Quests</Text.Heading2>
+        <Box width={1} mb='20px'>
+          <Text.Heading2>Quests list*</Text.Heading2>
           <Text.Body>Portfolio - This actual website.</Text.Body>
           <Text.Body>
             LaikaJS - 2d game engine with JavaScript and canvas.
+          </Text.Body>
+
+          <Text.Body mt='10px'>
+            * List of stuff that I am working on when I have some free time.
           </Text.Body>
         </Box>
       </Flex>
