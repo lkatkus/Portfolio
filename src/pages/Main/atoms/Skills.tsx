@@ -1,7 +1,6 @@
 import React from 'react';
-import { Flex, Box } from '@rebass/grid';
 
-import { Button, Icons, Text, SkillzBox } from 'components';
+import { Button, Grid, Icons, Text, SkillzBox } from 'components';
 
 const SKILLZ_LIST = [
   'HTML',
@@ -13,8 +12,8 @@ const SKILLZ_LIST = [
 ];
 
 const Skills: React.FC = () => (
-  <Flex flexWrap='wrap'>
-    <Box width={1} mb='20px'>
+  <Grid.Container flexWrap='wrap'>
+    <Grid.Box width={1} mb='20px'>
       <Text.Heading2>Experience</Text.Heading2>
       <Text.Body mb='10px'>
         Up to this point I have worked on multiple large scale projects, mainly
@@ -32,7 +31,7 @@ const Skills: React.FC = () => (
         Dev.to profiles, or just message me on LinkedIn.
       </Text.Body>
 
-      <Flex>
+      <Grid.Container>
         <Button
           mr='20px'
           onClick={() => {
@@ -60,10 +59,10 @@ const Skills: React.FC = () => (
         >
           <Icons.LinkedIn size={40} />
         </Button>
-      </Flex>
-    </Box>
+      </Grid.Container>
+    </Grid.Box>
 
-    <Box width={1} mb='20px'>
+    <Grid.Box width={1} mb='20px'>
       <Text.Heading2>Skills</Text.Heading2>
       {SKILLZ_LIST.map((skill) => (
         <SkillzBox
@@ -79,8 +78,8 @@ const Skills: React.FC = () => (
         generated values. Seriously, let&apos;s get some coffee and talk.
         I&apos;ll bring donuts.
       </Text.Body>
-    </Box>
-  </Flex>
+    </Grid.Box>
+  </Grid.Container>
 );
 
 export default Skills;

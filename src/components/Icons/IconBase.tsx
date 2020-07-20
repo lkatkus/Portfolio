@@ -13,7 +13,7 @@ const defaultProps = {
   size: 20,
 };
 
-export default (Icon: React.FC, baseProps: BaseProps): React.FC<IconProps> => {
+export default (Icon: React.FC, baseProps?: BaseProps): React.FC<IconProps> => {
   const WithBase = ({ size, color }) => (
     <svg
       viewBox={baseProps?.viewBox || '0 0 40 40'}

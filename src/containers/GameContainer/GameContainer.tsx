@@ -2,8 +2,7 @@ import * as React from 'react';
 import styled from 'styled-components';
 import { Game } from 'laikajs';
 
-import { TextBox } from './TextBox';
-import { TitleScreen } from './TitleScreen';
+import { TextBox, TitleScreen } from './ui';
 import * as config from './config';
 
 const StyledCanvas = styled('canvas')`

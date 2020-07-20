@@ -1,56 +1,55 @@
 import React from 'react';
-import { Flex, Box } from '@rebass/grid';
 
-import { Text, SkillzBox } from 'components';
+import { Grid, Text, SkillzBox } from 'components';
 import Player from 'assets/images/animation-player.gif';
 
 const About: React.FC = () => (
-  <Flex flexWrap='wrap'>
-    <Box width={[1, 1, 1 / 3]}>
+  <Grid.Container flexWrap='wrap'>
+    <Grid.Box width={[1, 1, 1 / 3]} hide={[true, true]}>
       <img style={{ width: '100%' }} src={Player} />
-    </Box>
+    </Grid.Box>
 
-    <Box width={[1, 1, 2 / 3]}>
-      <Flex flexWrap='wrap'>
-        <Box width={1} mb='20px'>
-          <Text.Heading1>Laimonas Katkus</Text.Heading1>
+    <Grid.Box width={[1, 1, 2 / 3]}>
+      <Grid.Container flexWrap='wrap'>
+        <Grid.Box width={1} mb='20px'>
+          <Text.Heading2>Laimonas Katkus</Text.Heading2>
           <Text.Body>Class - Software developer</Text.Body>
           <Text.Body>Race - Human</Text.Body>
           <Text.Body>Location - Lithuania, Vilnius</Text.Body>
           <Text.Body>Superpower - Brazilian Jiu-Jitsu blue belt</Text.Body>
-        </Box>
+        </Grid.Box>
 
-        <Box width={1} mb='20px'>
+        <Grid.Box width={1} mb='20px'>
           <Text.Heading2>Stats</Text.Heading2>
-          <Flex flexWrap='wrap' mb='5px'>
-            <Box width={[0.2, 0.1]}>
+          <Grid.Container flexWrap='wrap' mb='5px'>
+            <Grid.Box width={[0.2, 0.1]}>
               <Text.Body>HP</Text.Body>
-            </Box>
-            <Box width={[0.8, 0.9]}>
+            </Grid.Box>
+            <Grid.Box width={[0.8, 0.9]}>
               <SkillzBox color='crimson' />
-            </Box>
-          </Flex>
+            </Grid.Box>
+          </Grid.Container>
 
-          <Flex flexWrap='wrap' mb='5px'>
-            <Box width={[0.2, 0.1]}>
+          <Grid.Container flexWrap='wrap' mb='5px'>
+            <Grid.Box width={[0.2, 0.1]}>
               <Text.Body>MP</Text.Body>
-            </Box>
-            <Box width={[0.8, 0.9]}>
+            </Grid.Box>
+            <Grid.Box width={[0.8, 0.9]}>
               <SkillzBox color='navy' />
-            </Box>
-          </Flex>
+            </Grid.Box>
+          </Grid.Container>
 
-          <Flex flexWrap='wrap' mb='5px'>
-            <Box width={[0.2, 0.1]}>
+          <Grid.Container flexWrap='wrap' mb='5px'>
+            <Grid.Box width={[0.2, 0.1]}>
               <Text.Body>EXP</Text.Body>
-            </Box>
-            <Box width={[0.8, 0.9]}>
+            </Grid.Box>
+            <Grid.Box width={[0.8, 0.9]}>
               <SkillzBox color='gold' />
-            </Box>
-          </Flex>
-        </Box>
+            </Grid.Box>
+          </Grid.Container>
+        </Grid.Box>
 
-        <Box width={1} mb='20px'>
+        <Grid.Box width={1} mb='20px'>
           <Text.Heading2>Origins</Text.Heading2>
           <Text.Body mb='10px'>
             Architect and project manager by education. I have worked on
@@ -71,10 +70,10 @@ const About: React.FC = () => (
             Who knows. Get in touch with me, if You think, that we might be
             going in the same direction.
           </Text.Body>
-        </Box>
-      </Flex>
-    </Box>
-  </Flex>
+        </Grid.Box>
+      </Grid.Container>
+    </Grid.Box>
+  </Grid.Container>
 );
 
 export default About;

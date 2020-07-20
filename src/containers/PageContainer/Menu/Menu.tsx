@@ -2,13 +2,13 @@ import React from 'react';
 
 import { Button, Text } from 'components';
 
-interface SidebarProps {
+interface MenuProps {
   openTab: (tab: any) => void;
   config: any[];
   activeTab: any;
 }
 
-const Sidebar: React.FC<SidebarProps> = ({ config, openTab, activeTab }) => (
+const Menu: React.FC<MenuProps> = ({ config, openTab, activeTab }) => (
   <React.Fragment>
     {config.map((option) => (
       <Button
@@ -24,4 +24,4 @@ const Sidebar: React.FC<SidebarProps> = ({ config, openTab, activeTab }) => (
     ))}
   </React.Fragment>
 );
-export default Sidebar;
+export default Menu;

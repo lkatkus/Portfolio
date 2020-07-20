@@ -42,7 +42,9 @@ const TitleScreen: React.FC<TitleScreenProps> = ({
         alignItems='center'
         justifyContent='center'
       >
-        <Text.Heading1>My Super Javascript Adventure</Text.Heading1>
+        <Text.Heading1 textAlign='center'>
+          My Super Javascript Adventure
+        </Text.Heading1>
 
         <Text.Body mt='20px'>Use arrow keys for controls</Text.Body>
         <Text.Body>View in landscape mode for best look</Text.Body>
@@ -54,7 +56,7 @@ const TitleScreen: React.FC<TitleScreenProps> = ({
         </Button>
       </Flex>
 
-      <Text.Body>© 2020 Laimonas Katkus. All rights reserved.</Text.Body>
+      <Text.SubBody>© 2020 Laimonas Katkus. All rights reserved.</Text.SubBody>
     </TitleScreenWrapper>
   ) : null;
 

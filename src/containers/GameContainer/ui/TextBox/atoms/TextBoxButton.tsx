@@ -6,4 +6,5 @@ export default styled('button')`
   padding: 10px 20px;
   text-transform: uppercase;
   background-color: white;
+  align-self: flex-end;
 `;

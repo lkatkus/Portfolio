@@ -4,7 +4,8 @@ import styled from 'styled-components';
 import { Button, Icons } from 'components';
 import { useModal } from 'hooks';
 
-import { Sidebar } from './Sidebar';
+import { Menu } from './Menu';
+import { Modal } from './Modal';
 import { Content } from './Content';
 
 const StyledPageContainer = styled('div')`
@@ -29,47 +30,42 @@ interface PageWrapperProps {
   menuConfig: any[];
 }
 
-const Menu: React.FC<any> = ({ children, config }) => {
+const PageContainer: React.FC<PageWrapperProps> = ({
+  children,
+  menuConfig,
+}) => {
   const [activeTab, setActiveTab] = React.useState<any>(null);
 
-  const {
-    showModal: showMenu,
-    hideModal: hideMenu,
-    Modal: MenuModal,
-  } = useModal(
-    <Sidebar
+  const { showModal: showMenu, Modal: MenuModal } = useModal(
+    <Menu
       openTab={(tab) => setActiveTab(tab)}
-      config={config}
+      config={menuConfig}
       activeTab={activeTab}
-    />
+    />,
+    {
+      component: Modal,
+    }
   );
+
   const {
     showModal: showContent,
     hideModal: hideContent,
     Modal: ContentModal,
-  } = useModal(
-    <Content
-      config={config}
-      activeTab={activeTab}
-      closeTab={() => setActiveTab(null)}
-    />,
-    {
-      onClose: () => setActiveTab(null),
-    }
-  );
+  } = useModal(<Content config={menuConfig} activeTab={activeTab} />, {
+    component: Modal,
+    onClose: () => setActiveTab(null),
+  });
 
   React.useEffect(() => {
     if (activeTab) {
-      hideMenu();
       showContent();
     } else if (!activeTab) {
-      hideMenu();
       hideContent();
     }
   }, [activeTab]);
 
   return (
-    <React.Fragment>
+    <StyledPageContainer>
       <ButtonWrapper>
         <Button onClick={showMenu} p='5px'>
           <Icons.Burger />
@@ -79,23 +75,13 @@ const Menu: React.FC<any> = ({ children, config }) => {
       <MenuModal />
       <ContentModal />
 
-      {children({
-        openTab: setActiveTab,
-      })}
-    </React.Fragment>
+      <ChildrenContainer>
+        {children({
+          openTab: setActiveTab,
+        })}
+      </ChildrenContainer>
+    </StyledPageContainer>
   );
 };
 
-const PageContainer: React.FC<PageWrapperProps> = ({
-  children,
-  menuConfig,
-}) => (
-  <StyledPageContainer>
-    <Menu config={menuConfig}>
-      {({ openTab }) => (
-        <ChildrenContainer>{children({ openTab: openTab })}</ChildrenContainer>
-      )}
-    </Menu>
-  </StyledPageContainer>
-);
 export default PageContainer;

@@ -10,7 +10,7 @@ export default styled.button<ButtonProps & SpaceProps>`
   border: none;
   outline: none;
   background: ${({ active }) =>
-    active ? 'rgba(240, 245, 245, 1)' : 'rgba(255, 255, 255, 0)'};
+    active ? 'rgba(240, 245, 245, 1)' : 'rgba(255, 255, 255, 0.3)'};
   display: inline-flex;
   cursor: pointer;
   transition: all;

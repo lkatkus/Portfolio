@@ -26,7 +26,7 @@ const TextBase = styled.div<TextProps>`
 export default (
   element: string,
   baseProps: TextProps
-): React.FC<SpaceProps> => ({ children, ...props }) => (
+): React.FC<SpaceProps & TextProps> => ({ children, ...props }) => (
   <TextBase as={element as any} {...baseProps} {...props}>
     {children}
   </TextBase>
