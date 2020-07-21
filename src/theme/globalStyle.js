@@ -1,6 +1,6 @@
 import { createGlobalStyle } from 'styled-components';
 import { normalize } from 'styled-normalize';
-import font from 'assets/fonts/prstart.ttf';
+import font from 'assets/fonts/PressStart2P-Regular.ttf';
 
 export default createGlobalStyle`
   ${normalize}

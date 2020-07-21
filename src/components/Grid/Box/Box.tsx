@@ -1,5 +1,6 @@
 import { Box, BoxProps } from '@rebass/grid';
 import styled from 'styled-components';
+import { border, BorderProps } from 'styled-system';
 
 const getHiddenQuery = (hide) => {
   let result = ``;
@@ -44,10 +45,11 @@ const getHiddenQuery = (hide) => {
   return result;
 };
 
-interface Props extends BoxProps {
+interface Props {
   hide?: boolean[];
 }
 
-export default styled<React.FC<Props>>(Box)`
+export default styled<React.FC<Props & BoxProps & BorderProps>>(Box)`
   ${({ hide }) => (hide ? getHiddenQuery(hide) : undefined)}
+  ${border}
 `;

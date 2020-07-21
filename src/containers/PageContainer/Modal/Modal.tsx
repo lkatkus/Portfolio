@@ -42,14 +42,14 @@ const Modal: React.FC<ModalProps> = ({ children, closeModal, onClose }) => (
       flexDirection='column'
       width={[0.9, 0.8, 0.6, 'auto']}
     >
-      <Grid.Container justifyContent='flex-end' mb='10px'>
+      <Grid.Container justifyContent='flex-end' mb='5px'>
         <Button
           onClick={() => {
             closeModal();
             onClose && onClose();
           }}
         >
-          <Icons.Close />
+          <Icons.Close size={15} />
         </Button>
       </Grid.Container>
       <ModalContentContainer flexDirection='column'>

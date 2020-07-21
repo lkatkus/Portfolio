@@ -66,7 +66,7 @@ const About: React.FC = () => (
             Additionally I have touched NodeJS and MongoDB to see JavaScript
             possibilities on the server side.
           </Text.Body>
-          <Text.Body mb='10px'>
+          <Text.Body>
             Who knows. Get in touch with me, if You think, that we might be
             going in the same direction.
           </Text.Body>
