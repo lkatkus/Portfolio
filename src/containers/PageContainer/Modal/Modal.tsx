@@ -44,6 +44,7 @@ const Modal: React.FC<ModalProps> = ({ children, closeModal, onClose }) => (
     >
       <Grid.Container justifyContent='flex-end' mb='5px'>
         <Button
+          variant='icon'
           onClick={() => {
             closeModal();
             onClose && onClose();

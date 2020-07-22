@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Grid } from 'components';
+import { Grid, Text } from 'components';
 
 import {
   TextBoxContainer,
@@ -22,7 +22,7 @@ const TextBox: React.FC<GameTextBoxProps> = ({ event }) =>
             <img src={event.image}></img>
           </Grid.Box>
           <Grid.Box p='20px' flex={1}>
-            {event.text}
+            <Text.Heading2>{event.text}</Text.Heading2>
           </Grid.Box>
         </TextBoxStyle>
 

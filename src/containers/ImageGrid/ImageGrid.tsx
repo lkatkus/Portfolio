@@ -1,13 +1,8 @@
 import React from 'react';
 
-import Grid from './../Grid';
-import { Image } from './../Image';
+import { Grid, Image } from 'components';
 
-interface ImageGridProps {
-  images: any[];
-}
-
-const ImageGrid: React.FC<ImageGridProps> = ({ images }) => (
+const ImageGrid: React.FC<{ images: string[] }> = ({ images }) => (
   <Grid.Container flexWrap='wrap'>
     {images.map((image, index) => (
       <Grid.Box key={index} width={[1, 0.5, 1 / 3]}>

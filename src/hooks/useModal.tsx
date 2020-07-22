@@ -2,7 +2,7 @@ import React from 'react';
 import { createPortal } from 'react-dom';
 
 interface OptionsProps {
-  component: any;
+  component: React.FC<{ closeModal: () => void; onClose: () => void }>;
   onClose?: () => void;
 }
 

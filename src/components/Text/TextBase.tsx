@@ -1,10 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
-import { space, SpaceProps } from 'styled-system';
+import { space, SpaceProps, fontWeight, FontWeightProps } from 'styled-system';
 
 interface TextProps {
   fontFamily?: string;
   fontSize?: number;
+  fontWeight?: number;
   lineHeight?: number;
   color?: string;
   uppercase?: boolean;
@@ -20,13 +21,17 @@ const TextBase = styled.div<TextProps>`
   text-transform: ${({ uppercase }) => (uppercase ? 'uppercase' : undefined)};
   text-align: ${({ textAlign }) => (textAlign ? textAlign : undefined)};
 
+  ${fontWeight}
   ${space}
 `;
 
 export default (
   element: string,
   baseProps: TextProps
-): React.FC<SpaceProps & TextProps> => ({ children, ...props }) => (
+): React.FC<SpaceProps & FontWeightProps & TextProps> => ({
+  children,
+  ...props
+}) => (
   <TextBase as={element as any} {...baseProps} {...props}>
     {children}
   </TextBase>

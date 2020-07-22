@@ -1,10 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Flex } from '@rebass/grid';
 
-import { Button, Text } from 'components';
+import { Button, Grid, Text } from 'components';
 
-const TitleScreenWrapper = styled(Flex)`
+const TitleScreenWrapper = styled(Grid.Container)`
   position: absolute;
   top: 0;
   left: 0;
@@ -36,25 +35,31 @@ const TitleScreen: React.FC<TitleScreenProps> = ({
       alignItems='center'
       justifyContent='center'
     >
-      <Flex
+      <Grid.Container
         height='100%'
         flexDirection='column'
         alignItems='center'
         justifyContent='center'
       >
-        <Text.Heading1 textAlign='center'>
+        <Text.Heading1 mb='20px' textAlign='center'>
           My Super Javascript Adventure
         </Text.Heading1>
 
-        <Text.Body mt='20px'>Use arrow keys for controls</Text.Body>
-        <Text.Body>View in landscape mode for best look</Text.Body>
+        <Grid.Box mb='20px'>
+          <Text.Body mb='10px' textAlign='center'>
+            Use arrow keys or swipe to move
+          </Text.Body>
+          <Text.Body textAlign='center'>
+            View in landscape mode for best look
+          </Text.Body>
+        </Grid.Box>
 
         <Button onClick={loadGame} mt='20px' p='5px 10px'>
           <Text.Heading2>
             {!shouldLoadGame ? 'Load' : 'Loading...'}
           </Text.Heading2>
         </Button>
-      </Flex>
+      </Grid.Container>
 
       <Text.SubBody>© 2020 Laimonas Katkus. All rights reserved.</Text.SubBody>
     </TitleScreenWrapper>

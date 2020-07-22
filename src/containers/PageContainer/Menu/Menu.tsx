@@ -3,21 +3,17 @@ import React from 'react';
 import { Button, Text } from 'components';
 
 interface MenuProps {
-  openTab: (tab: any) => void;
-  config: any[];
-  activeTab: any;
+  openTab: (tab: string) => void;
+  config: { key: string; label: string; content: React.FC }[];
 }
 
-const Menu: React.FC<MenuProps> = ({ config, openTab, activeTab }) => (
+const Menu: React.FC<MenuProps> = ({ config, openTab }) => (
   <React.Fragment>
     {config.map((option) => (
       <Button
         key={option.key}
-        onClick={() => {
-          option.content ? openTab(option.key) : option.onClick();
-        }}
-        active={option.key === activeTab}
-        padding='5px 10px'
+        padding='10px'
+        onClick={() => openTab(option.key)}
       >
         <Text.Heading2>{option.label}</Text.Heading2>
       </Button>

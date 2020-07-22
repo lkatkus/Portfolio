@@ -1,7 +1,7 @@
 import React from 'react';
 
 interface ContentContainerProps {
-  config: any[];
+  config: { key: string; label: string; content: React.FC }[];
   activeTab: string;
 }
 

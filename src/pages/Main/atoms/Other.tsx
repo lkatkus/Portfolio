@@ -1,6 +1,8 @@
 import React from 'react';
 
-import { Grid, ImageGrid, Text } from 'components';
+import { ImageGrid } from 'containers';
+import { Grid, Text } from 'components';
+
 import Image1 from 'assets/images/other/arch-1.jpg';
 import Image2 from 'assets/images/other/arch-2.jpg';
 import Image3 from 'assets/images/other/arch-3.jpg';
@@ -16,8 +18,8 @@ const Other: React.FC = () => (
     <Grid.Box width={1}>
       <Text.Heading2>Other stuff</Text.Heading2>
       <Text.Body mb='20px'>
-        Some fancy words I know, from my previous endeavours - Autocad, Archicad,
-        3DS MAX, Archicad, Photoshop, Illustrator, Aperture, Bokeh.
+        Some fancy words I know, from my previous endeavours - Autocad,
+        Archicad, 3DS MAX, Archicad, Photoshop, Illustrator, Aperture, Bokeh.
       </Text.Body>
     </Grid.Box>
     <Grid.Box width={1}>

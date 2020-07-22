@@ -20,28 +20,19 @@ const ButtonWrapper = styled('div')`
   margin: 10px;
 `;
 
-const ChildrenContainer = styled('div')`
-  width: 100%;
-  height: 100%;
-`;
-
 interface PageWrapperProps {
-  children: any;
-  menuConfig: any[];
+  children: (props: { openTab: (tab: string) => void }) => JSX.Element;
+  menuConfig: { key: string; label: string; content: React.FC }[];
 }
 
 const PageContainer: React.FC<PageWrapperProps> = ({
   children,
   menuConfig,
 }) => {
-  const [activeTab, setActiveTab] = React.useState<any>(null);
+  const [activeTab, setActiveTab] = React.useState<string>(null);
 
   const { showModal: showMenu, Modal: MenuModal } = useModal(
-    <Menu
-      openTab={(tab) => setActiveTab(tab)}
-      config={menuConfig}
-      activeTab={activeTab}
-    />,
+    <Menu config={menuConfig} openTab={(tab) => setActiveTab(tab)} />,
     {
       component: Modal,
     }
@@ -67,7 +58,7 @@ const PageContainer: React.FC<PageWrapperProps> = ({
   return (
     <StyledPageContainer>
       <ButtonWrapper>
-        <Button onClick={showMenu} p='5px'>
+        <Button onClick={showMenu} p='5px' variant='icon'>
           <Icons.Burger />
         </Button>
       </ButtonWrapper>
@@ -75,11 +66,11 @@ const PageContainer: React.FC<PageWrapperProps> = ({
       <MenuModal />
       <ContentModal />
 
-      <ChildrenContainer>
+      <StyledPageContainer>
         {children({
           openTab: setActiveTab,
         })}
-      </ChildrenContainer>
+      </StyledPageContainer>
     </StyledPageContainer>
   );
 };
