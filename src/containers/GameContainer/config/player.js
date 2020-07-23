@@ -3,8 +3,8 @@ import { playerTexture } from './assets';
 export default {
   name: 'player',
   movement: {
-    speedX: 8,
-    speedY: 8,
+    speedX: 10,
+    speedY: 12,
   },
   texture: {
     source: playerTexture,

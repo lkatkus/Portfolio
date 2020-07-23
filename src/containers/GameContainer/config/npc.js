@@ -4,7 +4,7 @@ export default [
   {
     name: 'cat',
     movement: {
-      speedX: 10,
+      speedX: 8,
       speedY: 8,
     },
     texture: {

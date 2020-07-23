@@ -191,8 +191,8 @@ const GAME_EVENTS = {
     player.levelUp(playerTextureLeveled, {
       tileCols: 3,
       canFly: true,
-      speedX: 20,
-      speedY: 20,
+      speedX: 12,
+      speedY: 12,
     }),
   enableControls: ({ player }) => player.enableControls(),
   disableControls: ({ player }) => player.disableControls(),
