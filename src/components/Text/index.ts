@@ -5,12 +5,13 @@ export const Text = {
     textAlign: 'justify',
     fontFamily: 'Roboto',
     fontSize: 16,
-    lineHeight: 20,
+    lineHeight: 24,
   }),
   SubBody: TextBase('p', {
     textAlign: 'justify',
     fontFamily: 'Roboto',
-    fontSize: 14,
+    fontSize: 12,
+    lineHeight: 20,
   }),
   Heading1: TextBase('h1', {
     fontFamily: 'Press Start',

@@ -21,7 +21,7 @@ const variant = ({ variant }: any) => {
       `;
     default:
       return `
-        background: rgba(255, 255, 255, 0.3);
+        background: rgba(255, 255, 255, 0.6);
   
         &:hover {
           background-color: rgba(240, 245, 245, 1);

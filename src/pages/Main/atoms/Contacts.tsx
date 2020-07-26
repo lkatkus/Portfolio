@@ -5,8 +5,11 @@ import { Button, Icons, Grid, Text } from 'components';
 const Contacts: React.FC = () => (
   <Grid.Container flexWrap='wrap'>
     <Grid.Box width={1}>
-      <Text.Heading2>Contacts</Text.Heading2>
-      <Text.Body mb='20px'>Find me in:</Text.Body>
+      <Text.Heading2 mb='10px'>Contacts</Text.Heading2>
+      <Text.Body mb='20px'>
+        If you want to know more about my experience, check out my Github or
+        Dev.to profiles, or just message me on LinkedIn.
+      </Text.Body>
       <Grid.Container>
         <Button
           variant='icon'

@@ -42,7 +42,7 @@ const Modal: React.FC<ModalProps> = ({ children, closeModal, onClose }) => (
       flexDirection='column'
       width={[0.9, 0.8, 0.6, 'auto']}
     >
-      <Grid.Container justifyContent='flex-end' mb='5px'>
+      <Grid.Container justifyContent='flex-end' mb='10px'>
         <Button
           variant='icon'
           onClick={() => {
@@ -50,7 +50,7 @@ const Modal: React.FC<ModalProps> = ({ children, closeModal, onClose }) => (
             onClose && onClose();
           }}
         >
-          <Icons.Close size={15} />
+          <Icons.Close size={12} />
         </Button>
       </Grid.Container>
       <ModalContentContainer flexDirection='column'>

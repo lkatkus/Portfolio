@@ -16,7 +16,7 @@ import Image9 from 'assets/images/other/arch-9.jpg';
 const Other: React.FC = () => (
   <Grid.Container flexWrap='wrap'>
     <Grid.Box width={1}>
-      <Text.Heading2>Other stuff</Text.Heading2>
+      <Text.Heading2 mb='10px'>Other stuff</Text.Heading2>
       <Text.Body mb='20px'>
         Some fancy words I know, from my previous endeavours - Autocad,
         Archicad, 3DS MAX, Archicad, Photoshop, Illustrator, Aperture, Bokeh.

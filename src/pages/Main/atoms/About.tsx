@@ -1,18 +1,18 @@
 import React from 'react';
 
 import { Grid, Text, SkillzBox } from 'components';
-import Player from 'assets/images/animation-player.gif';
+// import Player from 'assets/images/animation-player.gif';
 
 const About: React.FC = () => (
   <Grid.Container flexWrap='wrap'>
-    <Grid.Box width={[1, 1, 1 / 3]} hide={[true, true]}>
+    {/* <Grid.Box width={[1, 1, 1 / 3]} hide={[true, true]}>
       <img style={{ width: '100%' }} src={Player} />
-    </Grid.Box>
+    </Grid.Box> */}
 
-    <Grid.Box width={[1, 1, 2 / 3]}>
+    <Grid.Box width={1}>
       <Grid.Container flexWrap='wrap'>
         <Grid.Box width={1} mb='20px'>
-          <Text.Heading2 mb='5px'>Laimonas Katkus</Text.Heading2>
+          <Text.Heading2 mb='10px'>Laimonas Katkus</Text.Heading2>
           <Text.Body>Class - Software developer</Text.Body>
           <Text.Body>Race - Human</Text.Body>
           <Text.Body>Location - Lithuania, Vilnius</Text.Body>
@@ -20,7 +20,7 @@ const About: React.FC = () => (
         </Grid.Box>
 
         <Grid.Box width={1} mb='20px'>
-          <Text.Heading2 mb='5px'>Stats</Text.Heading2>
+          <Text.Heading2 mb='10px'>Stats</Text.Heading2>
           <Grid.Container flexWrap='wrap' mb='5px'>
             <Grid.Box width={[0.2, 0.1]}>
               <Text.Body>HP</Text.Body>
@@ -50,7 +50,7 @@ const About: React.FC = () => (
         </Grid.Box>
 
         <Grid.Box width={1} mb='20px'>
-          <Text.Heading2 mb='5px'>Origins</Text.Heading2>
+          <Text.Heading2 mb='10px'>Origins</Text.Heading2>
           <Text.Body mb='10px'>
             Architect (building kind) and project manager by education. I have
             worked on multiple real estate projects of many different scales in
@@ -60,8 +60,9 @@ const About: React.FC = () => (
           <Text.Body mb='10px'>
             Even though, IT and tech stuff in general was in my life from early
             age, the decision to move to IT, was not an easy one. Right now I am
-            glad, that I have followed my gut. To be continued...
+            glad, that I have followed my gut.
           </Text.Body>
+          <Text.Body>To be continued...</Text.Body>
         </Grid.Box>
       </Grid.Container>
     </Grid.Box>
