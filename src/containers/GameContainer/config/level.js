@@ -10,6 +10,7 @@ const TILESHEET_COLS = 20;
 const TILESHEET_SPRITE_SIZE = TILESHEET_WIDTH / TILESHEET_COLS;
 
 const TILES_CLIMBABLE = [21, 22, 23];
+const TILES_NON_TEXTURE = [SPAWN_MARKER, -1, 0];
 const TILES_SOLID = [
   1,
   2,
@@ -99,6 +100,7 @@ export default {
     types: {
       solid: TILES_SOLID,
       climbable: TILES_CLIMBABLE,
+      nonTexture: TILES_NON_TEXTURE
     }
   },
 };

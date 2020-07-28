@@ -20,6 +20,10 @@
     },
     "typeRoots": ["./src/types"]
   },
+  "awesomeTypescriptLoaderOptions": {
+    "useBabel": true,
+    "babelCore": "@babel/core"
+  },
   "include": ["./src"],
   "exclude": ["./src/types"]
 }
