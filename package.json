@@ -33,9 +33,11 @@
   },
   "dependencies": {
     "@rebass/grid": "^6.1.0",
-    "laikajs": "0.0.6",
+    "core-js": "^3.6.5",
+    "laikajs": "0.0.8",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "regenerator-runtime": "^0.13.7",
     "styled-components": "^5.1.1",
     "styled-normalize": "^8.0.7",
     "styled-system": "^5.1.5"
