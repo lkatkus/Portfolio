@@ -46,6 +46,15 @@ module.exports = {
         parallel: true,
       }),
     ],
+    splitChunks: {
+      chunks: 'all',
+      cacheGroups: {
+        defaultVendors: {
+          test: /[\\/]node_modules[\\/]/,
+          filename: 'vendors.js',
+        },
+      },
+    },
   },
   plugins: [
     new HtmlWebpackPlugin({
