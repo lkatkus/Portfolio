@@ -17,7 +17,7 @@ const TextBox: React.FC<GameTextBoxProps> = ({ event }) =>
             <img src={event.image}></img>
           </Grid.Box>
           <Grid.Box p='20px' flex={1}>
-            <Text.Heading2 textAlign='justify'>{event.text}</Text.Heading2>
+            <Text.Heading2>{event.text}</Text.Heading2>
           </Grid.Box>
         </TextBoxStyle>
 
