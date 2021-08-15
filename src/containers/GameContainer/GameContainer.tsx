@@ -46,7 +46,10 @@ const GameContainer: React.FC<GameWrapperProps> = ({ onOpenTab }) => {
           canvas: canvasRef.current,
         },
         {
-          onLoadGame: () => setGameLoaded(true),
+          onLoadGame: (game) => {
+            game.startGame();
+            setGameLoaded(true);
+          },
         }
       );
     }

@@ -42,7 +42,7 @@ declare module 'laikajs' {
   }
 
   interface ActionConfig {
-    onLoadGame?: () => void;
+    onLoadGame?: (game: any) => void;
     onDraw?: () => void;
   }
 

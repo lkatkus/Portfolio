@@ -1,5 +1,5 @@
 export { default as levelTileSheet } from './level-tile-sheet.png';
-export { default as playerTexture } from './player-tile-sheet.png';
+export { default as playerTexture } from './player-tile-sheet-v2.png';
 export { default as playerTextureLeveled } from './player-tile-sheet-leveled.png';
 export { default as npcCatTexture } from './npc-cat-tileSheet.png';
 

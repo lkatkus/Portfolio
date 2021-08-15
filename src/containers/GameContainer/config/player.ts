@@ -8,10 +8,11 @@ export default {
   },
   texture: {
     source: playerTexture,
-    height: 200,
-    width: 100,
-    tileCols: 8,
+    height: 128,
+    width: 128,
+    tileCols: 7,
     drawOffset: 1,
     drawHeightOffset: 2,
+    drawWidthOffset: 2
   },
 };
