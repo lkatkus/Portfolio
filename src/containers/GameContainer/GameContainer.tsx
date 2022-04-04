@@ -7,6 +7,7 @@ import * as assets from './config/assets';
 import { getConfig as getPlayerConfig } from './config/player';
 import { getConfig as getLevelConfig } from './config/level';
 import { getConfig as getEventsConfig } from './config/events';
+import { getConfig as getNpcConfig } from './config/npc';
 
 const StyledCanvas = styled('canvas')`
   width: 100%;
@@ -32,6 +33,7 @@ interface Event {
   };
 }
 
+// @TODO move to utils
 const loadAsset = (src): Promise<HTMLImageElement> => {
   return new Promise((res) => {
     const img = new Image();
@@ -51,6 +53,9 @@ const initGame = async (
     levelTextureAsset,
     playerTextureAsset,
     playerTextureLeveledAsset,
+    catTextureAsset,
+    dogTextureAsset,
+    moonTextureAsset,
     playerImage,
     roboImage,
     catImage,
@@ -58,6 +63,9 @@ const initGame = async (
     loadAsset(assets.levelTileSheet),
     loadAsset(assets.playerTexture),
     loadAsset(assets.playerTextureLeveled),
+    loadAsset(assets.catTexture),
+    loadAsset(assets.dogTexture),
+    loadAsset(assets.moonTexture),
     loadAsset(assets.playerImage),
     loadAsset(assets.roboImage),
     loadAsset(assets.catImage),
@@ -68,7 +76,7 @@ const initGame = async (
       initRenderer: () => new WebGlRenderer(gl, { clearColor: [0, 0, 0, 0] }),
       level: getLevelConfig(levelTextureAsset),
       player: getPlayerConfig(playerTextureAsset),
-      // npc: getNpcConfig(catTextureAsset),
+      npc: getNpcConfig(catTextureAsset, moonTextureAsset, dogTextureAsset),
       events: getEventsConfig(
         {
           openTab: handleOpenTab,
@@ -112,7 +120,7 @@ const GameContainer: React.FC<GameWrapperProps> = ({ onOpenTab }) => {
           onOpenTab(tab);
         },
         handleOpenPage: (pageUrl: string) => {
-          console.log(pageUrl); // eslint-disable-line
+          window.open(pageUrl, '_blank').focus();
         },
         handleSetEvent: (eventData: any) => {
           setActiveEvent(eventData);
