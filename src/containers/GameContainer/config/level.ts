@@ -86,6 +86,22 @@ const LEVEL_LAYOUT = [
   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 ];
 
+export const getConfig = (levelTextureAsset: HTMLImageElement): any => ({
+  layout: LEVEL_LAYOUT,
+  spawnMarker: 'x',
+  tileSheet: {
+    src: levelTextureAsset,
+    tilesPerRow: 10,
+    spriteSize: levelTextureAsset.width / 20,
+    cols: 20,
+    types: {
+      solid: TILES_SOLID,
+      climbable: TILES_CLIMBABLE,
+      nonTexture: TILES_NON_TEXTURE,
+    },
+  },
+});
+
 export default {
   layout: LEVEL_LAYOUT,
   spawnMarker: SPAWN_MARKER,

@@ -1,9 +1,12 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import { Game } from 'laikajs';
+import { Game, WebGlRenderer } from 'laikajs';
 
 import { TextBox, TitleScreen } from './ui';
-import * as config from './config';
+import * as assets from './config/assets';
+import { getConfig as getPlayerConfig } from './config/player';
+import { getConfig as getLevelConfig } from './config/level';
+import { getConfig as getEventsConfig } from './config/events';
 
 const StyledCanvas = styled('canvas')`
   width: 100%;
@@ -29,29 +32,92 @@ interface Event {
   };
 }
 
+const loadAsset = (src): Promise<HTMLImageElement> => {
+  return new Promise((res) => {
+    const img = new Image();
+    img.src = src;
+
+    img.onload = () => {
+      res(img);
+    };
+  });
+};
+
+const initGame = async (
+  gl: WebGLRenderingContext,
+  { handleGameReady, handleOpenTab, handleOpenPage, handleSetEvent }: any
+) => {
+  const [
+    levelTextureAsset,
+    playerTextureAsset,
+    playerTextureLeveledAsset,
+    playerImage,
+    roboImage,
+    catImage,
+  ] = await Promise.all([
+    loadAsset(assets.levelTileSheet),
+    loadAsset(assets.playerTexture),
+    loadAsset(assets.playerTextureLeveled),
+    loadAsset(assets.playerImage),
+    loadAsset(assets.roboImage),
+    loadAsset(assets.catImage),
+  ]);
+
+  new Game(
+    {
+      initRenderer: () => new WebGlRenderer(gl, { clearColor: [0, 0, 0, 0] }),
+      level: getLevelConfig(levelTextureAsset),
+      player: getPlayerConfig(playerTextureAsset),
+      // npc: getNpcConfig(catTextureAsset),
+      events: getEventsConfig(
+        {
+          openTab: handleOpenTab,
+          openPage: handleOpenPage,
+          setEvent: handleSetEvent,
+        },
+        {
+          playerLeveledTexture: playerTextureLeveledAsset,
+        },
+        { playerImage, roboImage, catImage }
+      ),
+    },
+    {
+      onLoadGame: (game: any) => {
+        game.startGame();
+        handleGameReady(game);
+      },
+    }
+  );
+};
+
 const GameContainer: React.FC<GameWrapperProps> = ({ onOpenTab }) => {
-  const canvasRef = React.useRef();
+  const canvasRef = React.useRef<HTMLCanvasElement>();
   const [gameLoaded, setGameLoaded] = React.useState(false);
   const [shouldLoadGame, setShouldLoadGame] = React.useState(false);
   const [activeEvent, setActiveEvent] = React.useState<Event>(null);
 
   React.useEffect(() => {
     if (shouldLoadGame && canvasRef) {
-      new Game(
-        {
-          player: config.player,
-          npc: config.npc,
-          level: config.level,
-          events: config.events(onOpenTab, setActiveEvent),
-          canvas: canvasRef.current,
+      const gl = canvasRef.current.getContext('webgl', {
+        antialias: false,
+        depth: false,
+      });
+
+      initGame(gl, {
+        handleGameReady: (game) => {
+          game.startGame();
+          setGameLoaded(true);
         },
-        {
-          onLoadGame: (game) => {
-            game.startGame();
-            setGameLoaded(true);
-          },
-        }
-      );
+        handleOpenTab: (tab: any) => {
+          onOpenTab(tab);
+        },
+        handleOpenPage: (pageUrl: string) => {
+          console.log(pageUrl); // eslint-disable-line
+        },
+        handleSetEvent: (eventData: any) => {
+          setActiveEvent(eventData);
+        },
+      });
     }
   }, [shouldLoadGame, canvasRef]);
 
@@ -64,7 +130,12 @@ const GameContainer: React.FC<GameWrapperProps> = ({ onOpenTab }) => {
       />
 
       <TextBox event={activeEvent} />
-      <StyledCanvas ref={canvasRef} />
+      {/* @TODO add height and width */}
+      <StyledCanvas
+        ref={canvasRef}
+        width={window.innerWidth}
+        height={window.innerHeight}
+      />
     </React.Fragment>
   );
 };
