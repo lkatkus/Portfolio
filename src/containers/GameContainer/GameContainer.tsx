@@ -1,13 +1,8 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import { Game, WebGlRenderer } from 'laikajs';
 
-import { TextBox, TitleScreen } from './ui';
-import * as assets from './config/assets';
-import { getConfig as getPlayerConfig } from './config/player';
-import { getConfig as getLevelConfig } from './config/level';
-import { getConfig as getEventsConfig } from './config/events';
-import { getConfig as getNpcConfig } from './config/npc';
+import { TextBox, TitleScreen, ControlsProvider } from './ui';
+import { initGame } from './config';
 
 const StyledCanvas = styled('canvas')`
   width: 100%;
@@ -33,76 +28,14 @@ interface Event {
   };
 }
 
-// @TODO move to utils
-const loadAsset = (src): Promise<HTMLImageElement> => {
-  return new Promise((res) => {
-    const img = new Image();
-    img.src = src;
-
-    img.onload = () => {
-      res(img);
-    };
-  });
-};
-
-const initGame = async (
-  gl: WebGLRenderingContext,
-  { handleGameReady, handleOpenTab, handleOpenPage, handleSetEvent }: any
-) => {
-  const [
-    levelTextureAsset,
-    playerTextureAsset,
-    playerTextureLeveledAsset,
-    catTextureAsset,
-    dogTextureAsset,
-    moonTextureAsset,
-    playerImage,
-    roboImage,
-    catImage,
-  ] = await Promise.all([
-    loadAsset(assets.levelTileSheet),
-    loadAsset(assets.playerTexture),
-    loadAsset(assets.playerTextureLeveled),
-    loadAsset(assets.catTexture),
-    loadAsset(assets.dogTexture),
-    loadAsset(assets.moonTexture),
-    loadAsset(assets.playerImage),
-    loadAsset(assets.roboImage),
-    loadAsset(assets.catImage),
-  ]);
-
-  new Game(
-    {
-      initRenderer: () => new WebGlRenderer(gl, { clearColor: [0, 0, 0, 0] }),
-      level: getLevelConfig(levelTextureAsset),
-      player: getPlayerConfig(playerTextureAsset),
-      npc: getNpcConfig(catTextureAsset, moonTextureAsset, dogTextureAsset),
-      events: getEventsConfig(
-        {
-          openTab: handleOpenTab,
-          openPage: handleOpenPage,
-          setEvent: handleSetEvent,
-        },
-        {
-          playerLeveledTexture: playerTextureLeveledAsset,
-        },
-        { playerImage, roboImage, catImage }
-      ),
-    },
-    {
-      onLoadGame: (game: any) => {
-        game.startGame();
-        handleGameReady(game);
-      },
-    }
-  );
-};
-
 const GameContainer: React.FC<GameWrapperProps> = ({ onOpenTab }) => {
   const canvasRef = React.useRef<HTMLCanvasElement>();
+
+  const [game, setGame] = React.useState<any>(null);
   const [gameLoaded, setGameLoaded] = React.useState(false);
   const [shouldLoadGame, setShouldLoadGame] = React.useState(false);
   const [activeEvent, setActiveEvent] = React.useState<Event>(null);
+  const [moveState, setMoveState] = React.useState<any>(null);
 
   React.useEffect(() => {
     if (shouldLoadGame && canvasRef) {
@@ -113,7 +46,7 @@ const GameContainer: React.FC<GameWrapperProps> = ({ onOpenTab }) => {
 
       initGame(gl, {
         handleGameReady: (game) => {
-          game.startGame();
+          setGame(game);
           setGameLoaded(true);
         },
         handleOpenTab: (tab: any) => {
@@ -129,6 +62,18 @@ const GameContainer: React.FC<GameWrapperProps> = ({ onOpenTab }) => {
     }
   }, [shouldLoadGame, canvasRef]);
 
+  React.useEffect(() => {
+    if (game) {
+      const { isMoving, movingDirection } = moveState;
+
+      if (isMoving && movingDirection) {
+        game.player.moveStart(movingDirection);
+      } else {
+        game.player.moveEnd();
+      }
+    }
+  }, [moveState]);
+
   return (
     <React.Fragment>
       <TitleScreen
@@ -137,13 +82,14 @@ const GameContainer: React.FC<GameWrapperProps> = ({ onOpenTab }) => {
         loadGame={() => setShouldLoadGame(true)}
       />
 
-      <TextBox event={activeEvent} />
-      {/* @TODO add height and width */}
-      <StyledCanvas
-        ref={canvasRef}
-        width={window.innerWidth}
-        height={window.innerHeight}
-      />
+      <ControlsProvider isLoaded={gameLoaded} handleStateChange={setMoveState}>
+        <TextBox event={activeEvent} />
+        <StyledCanvas
+          ref={canvasRef}
+          width={window.innerWidth}
+          height={window.innerHeight}
+        />
+      </ControlsProvider>
     </React.Fragment>
   );
 };

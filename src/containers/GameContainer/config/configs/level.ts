@@ -1,14 +1,4 @@
-import { levelTileSheet } from './assets';
-
 const SPAWN_MARKER = 'x';
-const TILES_PER_ROW = 11;
-
-const TILESHEET_WIDTH = 1200;
-const TILESHEET_HEIGHT = 1200;
-const TILESHEET_ROWS = 20;
-const TILESHEET_COLS = 20;
-const TILESHEET_SPRITE_SIZE = TILESHEET_WIDTH / TILESHEET_COLS;
-
 const TILES_CLIMBABLE = [21, 22, 23];
 const TILES_NON_TEXTURE = [SPAWN_MARKER, -1, 0];
 const TILES_SOLID = [
@@ -88,7 +78,7 @@ const LEVEL_LAYOUT = [
 
 export const getConfig = (levelTextureAsset: HTMLImageElement): any => ({
   layout: LEVEL_LAYOUT,
-  spawnMarker: 'x',
+  spawnMarker: SPAWN_MARKER,
   tileSheet: {
     src: levelTextureAsset,
     tilesPerRow: 10,
@@ -101,22 +91,3 @@ export const getConfig = (levelTextureAsset: HTMLImageElement): any => ({
     },
   },
 });
-
-export default {
-  layout: LEVEL_LAYOUT,
-  spawnMarker: SPAWN_MARKER,
-  tileSheet: {
-    src: levelTileSheet,
-    tilesPerRow: TILES_PER_ROW,
-    spriteSize: TILESHEET_SPRITE_SIZE,
-    width: TILESHEET_WIDTH,
-    height: TILESHEET_HEIGHT,
-    rows: TILESHEET_ROWS,
-    cols: TILESHEET_COLS,
-    types: {
-      solid: TILES_SOLID,
-      climbable: TILES_CLIMBABLE,
-      nonTexture: TILES_NON_TEXTURE
-    }
-  },
-};
