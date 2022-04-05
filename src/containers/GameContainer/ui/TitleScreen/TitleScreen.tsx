@@ -25,11 +25,13 @@ const TitleWrapper = styled(Grid.Container)`
 interface TitleScreenProps {
   gameLoaded: boolean;
   shouldLoadGame: boolean;
-  loadGame: () => void;
+  handleLoadGame: () => void;
+  handleShowAbout: () => void;
 }
 
 const TitleScreen: React.FC<TitleScreenProps> = ({
-  loadGame,
+  handleLoadGame,
+  handleShowAbout,
   gameLoaded,
   shouldLoadGame,
 }) => {
@@ -78,10 +80,19 @@ const TitleScreen: React.FC<TitleScreenProps> = ({
               </Text.Body>
             </Grid.Box>
 
-            <Button onClick={loadGame} mt='20px' p='5px 10px'>
+            <Button onClick={handleLoadGame} mt='20px' p='5px 10px'>
               <Text.Heading2>
                 {!shouldLoadGame ? 'Start game' : 'Loading...'}
               </Text.Heading2>
+            </Button>
+
+            <Button
+              onClick={handleShowAbout}
+              mt='20px'
+              p='5px 10px'
+              disabled={shouldLoadGame}
+            >
+              <Text.Heading2>About</Text.Heading2>
             </Button>
           </TitleWrapper>
         </Grid.Container>

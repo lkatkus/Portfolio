@@ -10,6 +10,7 @@ const ModalWrapper = styled(Grid.Container)`
   width: 100%;
   height: 100%;
   background-color: rgba(255, 255, 255, 0.8);
+  z-index: 99;
 `;
 
 const ModalContainer = styled(Grid.Container)`

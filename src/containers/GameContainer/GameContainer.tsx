@@ -79,7 +79,8 @@ const GameContainer: React.FC<GameWrapperProps> = ({ onOpenTab }) => {
       <TitleScreen
         gameLoaded={gameLoaded}
         shouldLoadGame={shouldLoadGame}
-        loadGame={() => setShouldLoadGame(true)}
+        handleLoadGame={() => setShouldLoadGame(true)}
+        handleShowAbout={() => onOpenTab('about')}
       />
 
       <ControlsProvider isLoaded={gameLoaded} handleStateChange={setMoveState}>
