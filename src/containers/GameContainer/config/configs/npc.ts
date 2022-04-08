@@ -14,6 +14,9 @@ export const getConfig = (
       height: 32,
       width: 32,
       tileCols: 3,
+      drawOffset: 1,
+      drawWidthOffset: 2,
+      drawHeightOffset: 2,
     },
     min: {
       row: 33,
@@ -35,9 +38,9 @@ export const getConfig = (
       height: 32,
       width: 32,
       tileCols: 5,
-      drawOffset: 0.5,
-      drawWidthOffset: 1.5,
-      drawHeightOffset: 1.5,
+      drawOffset: 1,
+      drawWidthOffset: 2,
+      drawHeightOffset: 2,
     },
     min: {
       row: 41,

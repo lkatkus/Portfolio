@@ -1,4 +1,4 @@
-import { Game, WebGlRenderer } from 'laikajs';
+import { Game, WebGlRenderer, CanvasRenderer } from 'laikajs';
 
 import * as assets from './assets';
 import { getConfig as getPlayerConfig } from './configs/player';
@@ -18,8 +18,15 @@ const loadAsset = (src): Promise<HTMLImageElement> => {
 };
 
 export const initGame = async (
-  gl: WebGLRenderingContext,
-  { handleGameReady, handleOpenTab, handleOpenPage, handleSetEvent }: any
+  ctx: RenderingContext,
+  {
+    isWebGlSupported,
+    handleGameReady,
+    handleOpenTab,
+    handleOpenPage,
+    handleSetEvent,
+    handlePlayerYProgress,
+  }: any
 ): Promise<any> => {
   const [
     levelTextureAsset,
@@ -43,9 +50,11 @@ export const initGame = async (
     loadAsset(assets.catImage),
   ]);
 
+  const Renderer = isWebGlSupported ? WebGlRenderer : CanvasRenderer;
+
   new Game(
     {
-      initRenderer: () => new WebGlRenderer(gl, { clearColor: [0, 0, 0, 0] }),
+      initRenderer: () => new Renderer(ctx),
       level: getLevelConfig(levelTextureAsset),
       player: getPlayerConfig(playerTextureAsset),
       npc: getNpcConfig(catTextureAsset, moonTextureAsset, dogTextureAsset),
@@ -62,6 +71,15 @@ export const initGame = async (
       ),
     },
     {
+      onDraw: (game: any) => {
+        const worldHeight = game.level.levelLayout.y;
+        const playerY = game.player.y;
+        const playerYProgress = Number(
+          (worldHeight - playerY) / worldHeight
+        ).toPrecision(2);
+
+        handlePlayerYProgress(playerYProgress); // eslint-disable-line
+      },
       onLoadGame: (game: any) => {
         game.startGame();
         handleGameReady(game);

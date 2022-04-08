@@ -237,12 +237,12 @@ export const getConfig = (
       levelUp: ({ player }: any) => {
         player.levelUp(
           {
-            source: playerLeveledTexture,
+            src: playerLeveledTexture,
             height: playerLeveledTexture.height / 4,
             width: playerLeveledTexture.width / 4,
             tileCols: 3,
-            drawHeightOffset: 2,
-            drawWidthOffset: 1,
+            drawHeightOffset: 4,
+            drawWidthOffset: 2,
           },
           {
             tileCols: 3,

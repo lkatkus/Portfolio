@@ -7,12 +7,27 @@ import { initGame } from './config';
 const StyledCanvas = styled('canvas')`
   width: 100%;
   height: 100%;
+`;
+
+const Background = styled('div')`
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  position: absolute;
   background: rgb(255, 255, 255);
   background: linear-gradient(
     45deg,
     rgba(255, 255, 255, 1) 0%,
     rgba(135, 206, 250, 1) 100%
   );
+`;
+
+const DimBackground = styled('div')`
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  background: linear-gradient(10deg, #324c76 0%, #1a1a1e 100%);
 `;
 
 interface GameWrapperProps {
@@ -36,15 +51,31 @@ const GameContainer: React.FC<GameWrapperProps> = ({ onOpenTab }) => {
   const [shouldLoadGame, setShouldLoadGame] = React.useState(false);
   const [activeEvent, setActiveEvent] = React.useState<Event>(null);
   const [moveState, setMoveState] = React.useState<any>(null);
+  const [dim, setDim] = React.useState<number>(0);
 
   React.useEffect(() => {
     if (shouldLoadGame && canvasRef) {
-      const gl = canvasRef.current.getContext('webgl', {
+      const isWebGlSupported = false;
+      const type = isWebGlSupported ? 'webgl' : '2d';
+      const ctx = canvasRef.current.getContext(type, {
         antialias: false,
         depth: false,
       });
 
-      initGame(gl, {
+      if (!isWebGlSupported) {
+        (ctx as CanvasRenderingContext2D).imageSmoothingEnabled = false;
+      }
+
+      initGame(ctx, {
+        isWebGlSupported,
+        handlePlayerYProgress: (progress: number) => {
+          if (progress > 0.5) {
+            const dimming = (progress - 0.5) * 5;
+            setDim(dimming > 1 ? 1 : dimming);
+          } else {
+            setDim(0);
+          }
+        },
         handleGameReady: (game) => {
           setGame(game);
           setGameLoaded(true);
@@ -83,13 +114,16 @@ const GameContainer: React.FC<GameWrapperProps> = ({ onOpenTab }) => {
         handleShowAbout={() => onOpenTab('about')}
       />
 
+      <Background />
+      <DimBackground style={{ opacity: dim }} />
+
       <ControlsProvider isLoaded={gameLoaded} handleStateChange={setMoveState}>
-        <TextBox event={activeEvent} />
         <StyledCanvas
           ref={canvasRef}
           width={window.innerWidth}
           height={window.innerHeight}
         />
+        <TextBox event={activeEvent} />
       </ControlsProvider>
     </React.Fragment>
   );
