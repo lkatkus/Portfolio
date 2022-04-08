@@ -51,7 +51,7 @@ const Modal: React.FC<ModalProps> = ({ children, closeModal, onClose }) => (
             onClose && onClose();
           }}
         >
-          <Icons.Close size={12} />
+          <Icons.Close size={16} />
         </Button>
       </Grid.Container>
       <ModalContentContainer flexDirection='column'>

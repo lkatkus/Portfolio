@@ -98,7 +98,7 @@ const TitleScreen: React.FC<TitleScreenProps> = ({
         </Grid.Container>
 
         <Text.SubBody>
-          © 2020 Laimonas Katkus. All rights reserved.
+          © {new Date().getFullYear()} Laimonas Katkus. All rights reserved.
         </Text.SubBody>
       </TitleScreenWrapper>
 

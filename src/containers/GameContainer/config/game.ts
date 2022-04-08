@@ -20,7 +20,6 @@ const loadAsset = (src): Promise<HTMLImageElement> => {
 export const initGame = async (
   ctx: RenderingContext,
   {
-    isWebGlSupported,
     handleGameReady,
     handleOpenTab,
     handleOpenPage,
@@ -50,7 +49,12 @@ export const initGame = async (
     loadAsset(assets.catImage),
   ]);
 
-  const Renderer = isWebGlSupported ? WebGlRenderer : CanvasRenderer;
+  const Renderer =
+    ctx instanceof WebGLRenderingContext ? WebGlRenderer : CanvasRenderer;
+
+  if (ctx instanceof CanvasRenderingContext2D) {
+    ctx.imageSmoothingEnabled = false;
+  }
 
   new Game(
     {

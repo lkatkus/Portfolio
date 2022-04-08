@@ -3,6 +3,7 @@ import styled from 'styled-components';
 
 import { TextBox, TitleScreen, ControlsProvider } from './ui';
 import { initGame } from './config';
+import { getCanvasContext } from './GameContainer.utils';
 
 const StyledCanvas = styled('canvas')`
   width: 100%;
@@ -55,22 +56,15 @@ const GameContainer: React.FC<GameWrapperProps> = ({ onOpenTab }) => {
 
   React.useEffect(() => {
     if (shouldLoadGame && canvasRef) {
-      const isWebGlSupported = false;
-      const type = isWebGlSupported ? 'webgl' : '2d';
-      const ctx = canvasRef.current.getContext(type, {
+      const ctx = getCanvasContext(canvasRef.current, {
         antialias: false,
         depth: false,
       });
 
-      if (!isWebGlSupported) {
-        (ctx as CanvasRenderingContext2D).imageSmoothingEnabled = false;
-      }
-
       initGame(ctx, {
-        isWebGlSupported,
         handlePlayerYProgress: (progress: number) => {
-          if (progress > 0.5) {
-            const dimming = (progress - 0.5) * 5;
+          if (progress > 0.55) {
+            const dimming = (progress - 0.55) * 5;
             setDim(dimming > 1 ? 1 : dimming);
           } else {
             setDim(0);
