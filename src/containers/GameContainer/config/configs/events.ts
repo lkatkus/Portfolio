@@ -1,6 +1,18 @@
+import * as sfx from '../sfx';
+
 const getEventConfig = ({ app, game, assets }: any) => {
-  return (gameObjects: any) => {
+  return (gameApi: any) => {
     return [
+      {
+        id: 'musicPreloadSpace',
+        row: [21, 23],
+        col: [12, 14],
+        eventHandler: () => {
+          gameApi.game.audioPlayer.preload('space', sfx.SpaceTheme, {
+            loop: true,
+          });
+        },
+      },
       {
         id: 'initialEvent',
         row: [40, 41],
@@ -19,7 +31,7 @@ const getEventConfig = ({ app, game, assets }: any) => {
         id: 'makeArchitectsGreatAgain',
         row: [40, 41],
         col: [14, 27],
-        eventHandler: (playerRef: any) =>
+        eventHandler: (playerRef: any) => {
           app.setEvent({
             text: 'I think that someone has told me that architects make great developers.',
             image: playerRef?.canFly
@@ -31,27 +43,29 @@ const getEventConfig = ({ app, game, assets }: any) => {
                 app.openTab('profile');
               },
             },
-          }),
+          });
+        },
         onLeave: app.clearEvent,
       },
       {
         id: 'moveUp',
         row: [40, 41],
         col: [35, 39],
-        eventHandler: (playerRef: any) =>
+        eventHandler: (playerRef: any) => {
           app.setEvent({
             text: playerRef?.canFly
               ? 'WOOF! WOOF! WOOF!'
               : 'You should try climbing up. Ohh... I mean - WOOF!',
             // image: 'dogImage',
-          }),
+          });
+        },
         onLeave: app.clearEvent,
       },
       {
         id: 'webPortfolio',
         row: [34, 35],
         col: [35, 38],
-        eventHandler: (playerRef: any) =>
+        eventHandler: (playerRef: any) => {
           app.setEvent({
             text: 'Hmmm... Not too bad! I think that I should come back later.',
             image: playerRef?.canFly
@@ -61,7 +75,8 @@ const getEventConfig = ({ app, game, assets }: any) => {
               text: 'Skills',
               clickHandler: () => app.openTab('skills'),
             },
-          }),
+          });
+        },
         onLeave: app.clearEvent,
       },
       {
@@ -201,8 +216,8 @@ const getEventConfig = ({ app, game, assets }: any) => {
               onClick: {
                 text: 'Touch the strange thing',
                 clickHandler: () => {
-                  game.levelUp(gameObjects);
-                  game.disableControls(gameObjects);
+                  game.levelUp(gameApi);
+                  game.disableControls(gameApi);
 
                   app.setEvent({
                     text: 'What is this new power, that i feel?! Virtual DOM, Hooks, Redux, GraphQL, Node!',
@@ -210,9 +225,10 @@ const getEventConfig = ({ app, game, assets }: any) => {
                     onClick: {
                       text: 'Try out this new power!',
                       clickHandler: () => {
-                        game.enableControls(gameObjects);
+                        game.enableControls(gameApi);
 
                         app.clearEvent();
+                        gameApi.game.audioPlayer.play('space');
                       },
                     },
                   });
@@ -260,7 +276,12 @@ export const getConfig = (
       disableControls: () => undefined,
       enableControls: () => undefined,
     },
-    app: { openTab, openPage, setEvent, clearEvent: () => setEvent(null) },
+    app: {
+      openTab,
+      openPage,
+      setEvent,
+      clearEvent: () => setEvent(null),
+    },
     assets,
   });
 };

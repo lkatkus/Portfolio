@@ -16,7 +16,7 @@ const About: React.FC = () => (
             The site was built using React and the game itself is handled by my
             personal game engine - LaikaJS. Rendering can be handle with both
             Canvas 2d or WebGl if it is supported. Assets were drawn by me using
-            the amazing Aseprite editor.
+            Aseprite editor.
           </Text.Body>
         </Grid.Box>
 
@@ -64,6 +64,13 @@ const About: React.FC = () => (
               </Grid.Container>
             </Grid.Box>
           </Grid.Container>
+        </Grid.Box>
+
+        <Grid.Box width={1} mb='20px'>
+          <Text.Heading2 mb='10px'>Music & SFX</Text.Heading2>
+          <Text.Body mb='10px'>
+            Amazing music by Eric Matyas www.soundimage.org
+          </Text.Body>
         </Grid.Box>
 
         <Grid.Box width={1}>

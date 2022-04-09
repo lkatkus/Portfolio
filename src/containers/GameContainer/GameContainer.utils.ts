@@ -1,5 +1,5 @@
 export const getCanvasContext = (
-  canvas: any,
+  canvas: HTMLCanvasElement,
   options: any
 ): RenderingContext => {
   const ctx =
