@@ -12,6 +12,13 @@ const TitleScreenWrapper = styled(Grid.Container)`
   width: 100%;
   height: 100%;
   z-index: 2;
+  background: linear-gradient(
+    90deg,
+    rgb(255, 255, 255) 0%,
+    rgb(135, 206, 250) 100%
+  );
+  clip-path: url(#curtain);
+  -webkit-clip-path: url(#curtain);
 `;
 
 const TitleWrapper = styled(Grid.Container)`
@@ -49,6 +56,8 @@ const TitleScreen: React.FC<TitleScreenProps> = ({
 
   return !animationFinished ? (
     <React.Fragment>
+      <Curtain curtainId='curtain' ref={animationRef} />
+
       <TitleScreenWrapper
         p='40px 20px'
         flexDirection='column'
@@ -101,8 +110,6 @@ const TitleScreen: React.FC<TitleScreenProps> = ({
           © {new Date().getFullYear()} Laimonas Katkus. All rights reserved.
         </Text.SubBody>
       </TitleScreenWrapper>
-
-      <Curtain ref={animationRef} />
     </React.Fragment>
   ) : null;
 };
