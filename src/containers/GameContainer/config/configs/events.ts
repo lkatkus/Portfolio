@@ -1,4 +1,4 @@
-import * as sfx from '../sfx';
+import { music, sfx } from '../audio';
 
 const getEventConfig = ({ app, game, assets }: any) => {
   return (gameApi: any) => {
@@ -8,8 +8,11 @@ const getEventConfig = ({ app, game, assets }: any) => {
         row: [21, 23],
         col: [12, 14],
         eventHandler: () => {
-          gameApi.game.audioPlayer.preload('space', sfx.SpaceTheme, {
+          gameApi.game.audioPlayer.preload('space', music.SpaceTheme, {
             loop: true,
+          });
+          gameApi.game.audioPlayer.preload('levelUp', sfx.levelUp, {
+            volume: 0.5,
           });
         },
       },
@@ -198,7 +201,7 @@ const getEventConfig = ({ app, game, assets }: any) => {
       {
         id: 'monolith',
         row: [5, 6],
-        col: [10, 13],
+        col: [9, 11],
         eventHandler: (playerRef: any) => {
           if (playerRef.canFly) {
             app.setEvent({
@@ -215,9 +218,13 @@ const getEventConfig = ({ app, game, assets }: any) => {
               image: assets.playerImage.src,
               onClick: {
                 text: 'Touch the strange thing',
-                clickHandler: () => {
-                  game.levelUp(gameApi);
+                clickHandler: async () => {
+                  app.clearEvent();
                   game.disableControls(gameApi);
+
+                  await game.levelUp(gameApi);
+
+                  gameApi.game.audioPlayer.play('space');
 
                   app.setEvent({
                     text: 'What is this new power, that i feel?! Virtual DOM, Hooks, Redux, GraphQL, Node!',
@@ -228,7 +235,6 @@ const getEventConfig = ({ app, game, assets }: any) => {
                         game.enableControls(gameApi);
 
                         app.clearEvent();
-                        gameApi.game.audioPlayer.play('space');
                       },
                     },
                   });
@@ -250,27 +256,37 @@ export const getConfig = (
 ): any => {
   return getEventConfig({
     game: {
-      levelUp: ({ player }: any) => {
-        player.levelUp(
-          {
-            src: playerLeveledTexture,
-            height: playerLeveledTexture.height / 4,
-            width: playerLeveledTexture.width / 4,
-            tileCols: 3,
-            drawHeightOffset: 4,
-            drawWidthOffset: 2,
-          },
-          {
-            tileCols: 3,
-            canFly: true,
-            speedXOffset: 0.12,
-            speedYOffset: 0.12,
-            speedX: Math.floor(player.level.TILE_SIZE / 0.12),
-            speedY: Math.floor(player.level.TILE_SIZE / 0.12),
-            textureWidth: playerLeveledTexture.height,
-            textureHeight: playerLeveledTexture.width,
-          }
-        );
+      levelUp: ({ player, game }: any) => {
+        return new Promise<void>((res) => {
+          player.levelUp(
+            {
+              src: playerLeveledTexture,
+              height: playerLeveledTexture.height / 4,
+              width: playerLeveledTexture.width / 4,
+              tileCols: 3,
+              drawHeightOffset: 4,
+              drawWidthOffset: 2,
+            },
+            {
+              tileCols: 3,
+              canFly: true,
+              speedXOffset: 0.12,
+              speedYOffset: 0.12,
+              speedX: Math.floor(player.level.TILE_SIZE / 0.12),
+              speedY: Math.floor(player.level.TILE_SIZE / 0.12),
+              textureWidth: playerLeveledTexture.height,
+              textureHeight: playerLeveledTexture.width,
+            }
+          );
+
+          game.audioPlayer.play(
+            'levelUp',
+            () => {
+              res();
+            },
+            true
+          );
+        });
       },
       // @TODO add control handling
       disableControls: () => undefined,

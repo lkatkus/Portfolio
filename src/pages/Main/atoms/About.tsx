@@ -69,7 +69,24 @@ const About: React.FC = () => (
         <Grid.Box width={1} mb='20px'>
           <Text.Heading2 mb='10px'>Music & SFX</Text.Heading2>
           <Text.Body mb='10px'>
-            Amazing music by Eric Matyas www.soundimage.org
+            Music by Eric Matyas{' '}
+            <Text.Link
+              href='https://www.soundimage.org/'
+              target='_blank'
+              rel='noreferrer'
+            >
+              www.soundimage.org
+            </Text.Link>
+          </Text.Body>
+          <Text.Body mb='10px'>
+            Sound effects from{' '}
+            <Text.Link
+              href='https://www.zapsplat.com'
+              target='_blank'
+              rel='noreferrer'
+            >
+              www.zapsplat.com
+            </Text.Link>
           </Text.Body>
         </Grid.Box>
       </Grid.Container>

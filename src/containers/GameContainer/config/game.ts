@@ -1,7 +1,7 @@
 import { Game, WebGlRenderer, CanvasRenderer, WebAudioPlayer } from 'laikajs';
 
 import * as assets from './assets';
-import * as sfx from './sfx';
+import { music } from './audio';
 import { getConfig as getPlayerConfig } from './configs/player';
 import { getConfig as getLevelConfig } from './configs/level';
 import { getConfig as getEventsConfig } from './configs/events';
@@ -89,7 +89,7 @@ export const initGame = async (
         handlePlayerYProgress(playerYProgress);
       },
       onAfterInit: (game: any) => {
-        game.audioPlayer.preload('main', sfx.MainTheme, { loop: true });
+        game.audioPlayer.preload('main', music.MainTheme, { loop: true });
       },
       onLoadGame: (game: any) => {
         game.startGame();

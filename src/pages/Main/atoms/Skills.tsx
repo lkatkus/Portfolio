@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Button, Grid, Icons, Text, SkillzBox } from 'components';
+import { Grid, Text, SkillzBox } from 'components';
 
 const SKILLZ_LIST = [
   'HTML',

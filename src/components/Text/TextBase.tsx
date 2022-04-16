@@ -8,6 +8,7 @@ interface TextProps {
   fontWeight?: number;
   lineHeight?: number;
   color?: string;
+  hoverColor?: string;
   uppercase?: boolean;
   textAlign?: string;
 }
@@ -21,18 +22,24 @@ const TextBase = styled.div<TextProps>`
   text-transform: ${({ uppercase }) => (uppercase ? 'uppercase' : undefined)};
   text-align: ${({ textAlign }) => (textAlign ? textAlign : undefined)};
 
+  &:hover {
+    color: ${({ hoverColor }) => hoverColor};
+  }
+
   ${fontWeight}
   ${space}
 `;
 
-export default (
-  element: string,
-  baseProps: TextProps
-): React.FC<SpaceProps & FontWeightProps & TextProps> => ({
-  children,
-  ...props
-}) => (
-  <TextBase as={element as any} {...baseProps} {...props}>
-    {children}
-  </TextBase>
-);
+const TextBaseBuilder =
+  <T,>(
+    element: string,
+    baseProps: TextProps
+  ): React.FC<SpaceProps & FontWeightProps & TextProps & T> =>
+  ({ children, ...props }) =>
+    (
+      <TextBase as={element as any} {...baseProps} {...props}>
+        {children}
+      </TextBase>
+    );
+
+export default TextBaseBuilder;

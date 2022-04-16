@@ -27,4 +27,12 @@ export const Text = {
     lineHeight: 24,
     uppercase: true,
   }),
+  Link: TextBase<{ href: string; target: '_blank'; rel: 'noreferrer' }>('a', {
+    color: 'unset',
+    hoverColor: '#e91e63',
+    textAlign: 'justify',
+    fontFamily: 'Roboto',
+    fontSize: 16,
+    lineHeight: 24,
+  }),
 };

@@ -3,7 +3,7 @@ export const getConfig = (playerTextureAsset: HTMLImageElement): any => ({
   movement: {
     speedX: 0.18,
     speedY: 0.2,
-    speedFallY: 12,
+    speedFallY: 8,
   },
   texture: {
     source: playerTextureAsset,
