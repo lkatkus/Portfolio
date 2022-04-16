@@ -1,8 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import { Button, Grid, Text } from 'components';
-
+import { AnimatedText, Button, Grid, Text } from 'components';
 import { Curtain } from './atoms';
 
 const TitleScreenWrapper = styled(Grid.Container)`
@@ -76,10 +75,13 @@ const TitleScreen: React.FC<TitleScreenProps> = ({
             alignItems='center'
             justifyContent='center'
           >
-            {/* @TODO add animated background */}
-            <Grid.Box p={['10px', '20px']}>
+            <Grid.Box p={['10px', '20px 20px 0']}>
               <Text.Heading1 textAlign='center'>
-                My Super Javascript Adventure
+                <div>My Super</div>
+                <div>
+                  <AnimatedText text='Javascript' />
+                </div>
+                <div>Adventure</div>
               </Text.Heading1>
             </Grid.Box>
 

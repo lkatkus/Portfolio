@@ -1,5 +1,6 @@
 import TextBase from './TextBase';
 
+export { default as AnimatedText } from './AnimatedText';
 export const Text = {
   Body: TextBase('p', {
     textAlign: 'justify',

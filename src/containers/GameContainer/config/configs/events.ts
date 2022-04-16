@@ -5,8 +5,8 @@ const getEventConfig = ({ app, game, assets }: any) => {
     return [
       {
         id: 'musicPreloadSpace',
-        row: [21, 23],
-        col: [12, 14],
+        row: [18, 23],
+        col: [11, 15],
         eventHandler: () => {
           gameApi.game.audioPlayer.preload('space', music.SpaceTheme, {
             loop: true,
