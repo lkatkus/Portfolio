@@ -55,7 +55,7 @@ const Options: React.FC<any> = ({ options, onOptionsChange }) => {
                 </Grid.Box>
               </Grid.Container>
 
-              <Grid.Container flexWrap='wrap'>
+              {/* <Grid.Container flexWrap='wrap'>
                 <Grid.Box width={[0.8, 0.9]}>
                   <Text.Body>SFX</Text.Body>
                 </Grid.Box>
@@ -73,7 +73,7 @@ const Options: React.FC<any> = ({ options, onOptionsChange }) => {
                     </Text.Heading2>
                   </Button>
                 </Grid.Box>
-              </Grid.Container>
+              </Grid.Container> */}
             </Grid.Box>
 
             <Grid.Box width={1}>
