@@ -72,14 +72,6 @@ const About: React.FC = () => (
             Amazing music by Eric Matyas www.soundimage.org
           </Text.Body>
         </Grid.Box>
-
-        <Grid.Box width={1}>
-          <Text.Heading2 mb='10px'>Controls</Text.Heading2>
-          <Text.Body mb='10px'>
-            Use arrow keys on keyboard or press anywhere on the screen on
-            mobile, swipe and hold a bit in the direction you want to move.
-          </Text.Body>
-        </Grid.Box>
       </Grid.Container>
     </Grid.Box>
   </Grid.Container>

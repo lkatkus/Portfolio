@@ -1,4 +1,4 @@
-import { Game, WebGlRenderer, CanvasRenderer } from 'laikajs';
+import { Game, WebGlRenderer, CanvasRenderer, WebAudioPlayer } from 'laikajs';
 
 import * as assets from './assets';
 import * as sfx from './sfx';
@@ -18,89 +18,10 @@ const loadAsset = (src): Promise<HTMLImageElement> => {
   });
 };
 
-// @TODO move to LaikaJS
-class WebAudioPlayer {
-  current: string;
-  available: { [key: string]: { isLoaded: boolean; data: HTMLAudioElement } };
-
-  constructor() {
-    this.current = null;
-    this.available = {};
-  }
-
-  load = async (name, src, options): Promise<void> => {
-    if (this.available[name]) {
-      return;
-    }
-
-    const data: HTMLAudioElement = await new Promise((res) => {
-      const audio = new Audio(src);
-
-      for (const key in options) {
-        audio[key] = options[key];
-      }
-
-      audio.oncanplaythrough = () => {
-        res(audio);
-      };
-    });
-
-    this.available[name] = { isLoaded: true, data: data };
-  };
-
-  preload = (name, src, options) => {
-    if (this.available[name]) {
-      return;
-    }
-
-    const audio = new Audio(src);
-
-    for (const key in options) {
-      audio[key] = options[key];
-    }
-
-    this.available[name] = { isLoaded: false, data: null };
-
-    audio.oncanplaythrough = () => {
-      this.available[name] = { isLoaded: true, data: audio };
-    };
-  };
-
-  play = (name) => {
-    if (name === this.current) {
-      return;
-    }
-
-    if (this.current) {
-      this.available[this.current].data.pause();
-    }
-
-    if (this.available[name].data && this.available[name].isLoaded) {
-      this.current = name;
-      this.available[name].data.play();
-    } else {
-      const checker = setInterval(() => {
-        if (this.available[name].data && this.available[name].isLoaded) {
-          clearInterval(checker);
-
-          this.play(name);
-        }
-      }, 500);
-    }
-  };
-
-  pause = () => {
-    if (!this.current) {
-      return;
-    }
-
-    this.available[this.current].data.pause();
-  };
-}
-
 export const initGame = async (
   ctx: RenderingContext,
   {
+    options,
     handleGameReady,
     handleOpenTab,
     handleOpenPage,
@@ -139,8 +60,9 @@ export const initGame = async (
 
   new Game(
     {
+      options,
       initRenderer: () => new Renderer(ctx),
-      initAudioPlayer: () => new WebAudioPlayer(),
+      initAudioPlayer: () => new WebAudioPlayer(options.audio),
       level: getLevelConfig(levelTextureAsset),
       player: getPlayerConfig(playerTextureAsset),
       npc: getNpcConfig(catTextureAsset, moonTextureAsset, dogTextureAsset),

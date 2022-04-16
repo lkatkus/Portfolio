@@ -23,7 +23,7 @@ const ButtonWrapper = styled('div')`
 
 interface PageWrapperProps {
   children: (props: { openTab: (tab: string) => void }) => JSX.Element;
-  menuConfig: { key: string; label: string; content: React.FC }[];
+  menuConfig: { key: string; label: string; content: React.FC; props?: any }[];
 }
 
 const PageContainer: React.FC<PageWrapperProps> = ({
@@ -59,8 +59,8 @@ const PageContainer: React.FC<PageWrapperProps> = ({
   return (
     <StyledPageContainer>
       <ButtonWrapper>
-        <Button onClick={showMenu} p='5px' variant='icon'>
-          <Icons.Burger />
+        <Button onClick={showMenu} p='10px' variant='icon'>
+          <Icons.Burger size={24} />
         </Button>
       </ButtonWrapper>
 

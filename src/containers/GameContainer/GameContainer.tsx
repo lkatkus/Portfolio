@@ -33,6 +33,7 @@ const DimBackground = styled('div')`
 
 interface GameWrapperProps {
   onOpenTab: (tab: string) => void;
+  options: { audio: { music: { on: boolean }; sfx: { on: boolean } } };
 }
 
 interface Event {
@@ -44,7 +45,7 @@ interface Event {
   };
 }
 
-const GameContainer: React.FC<GameWrapperProps> = ({ onOpenTab }) => {
+const GameContainer: React.FC<GameWrapperProps> = ({ onOpenTab, options }) => {
   const canvasRef = React.useRef<HTMLCanvasElement>();
 
   const [game, setGame] = React.useState<any>(null);
@@ -62,6 +63,7 @@ const GameContainer: React.FC<GameWrapperProps> = ({ onOpenTab }) => {
       });
 
       initGame(ctx, {
+        options,
         handlePlayerYProgress: (progress: number) => {
           if (progress > 0.55) {
             const dimming = (progress - 0.55) * 5;
@@ -99,13 +101,21 @@ const GameContainer: React.FC<GameWrapperProps> = ({ onOpenTab }) => {
     }
   }, [moveState]);
 
+  React.useEffect(() => {
+    if (game) {
+      if (options.audio) {
+        game.audioPlayer.updateOptions(options.audio);
+      }
+    }
+  }, [options]);
+
   return (
     <React.Fragment>
       <TitleScreen
         gameLoaded={gameLoaded}
         shouldLoadGame={shouldLoadGame}
         handleLoadGame={() => setShouldLoadGame(true)}
-        handleShowAbout={() => onOpenTab('about')}
+        handleOpenTab={onOpenTab}
       />
 
       <Background />

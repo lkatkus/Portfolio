@@ -33,12 +33,12 @@ interface TitleScreenProps {
   gameLoaded: boolean;
   shouldLoadGame: boolean;
   handleLoadGame: () => void;
-  handleShowAbout: () => void;
+  handleOpenTab: (tab: string) => void;
 }
 
 const TitleScreen: React.FC<TitleScreenProps> = ({
   handleLoadGame,
-  handleShowAbout,
+  handleOpenTab,
   gameLoaded,
   shouldLoadGame,
 }) => {
@@ -71,22 +71,16 @@ const TitleScreen: React.FC<TitleScreenProps> = ({
           justifyContent='center'
         >
           <TitleWrapper
-            p='40px 20px'
+            p={'40px'}
             flexDirection='column'
             alignItems='center'
             justifyContent='center'
           >
-            <Text.Heading1 mb='20px' textAlign='center'>
-              My Super Javascript Adventure
-            </Text.Heading1>
-
-            <Grid.Box mb='20px'>
-              <Text.Body mb='10px' textAlign='center'>
-                Use arrow keys or swipe to move
-              </Text.Body>
-              <Text.Body textAlign='center'>
-                View in landscape mode for best look
-              </Text.Body>
+            {/* @TODO add animated background */}
+            <Grid.Box p={['10px', '20px']}>
+              <Text.Heading1 textAlign='center'>
+                My Super Javascript Adventure
+              </Text.Heading1>
             </Grid.Box>
 
             <Button onClick={handleLoadGame} mt='20px' p='5px 10px'>
@@ -96,7 +90,16 @@ const TitleScreen: React.FC<TitleScreenProps> = ({
             </Button>
 
             <Button
-              onClick={handleShowAbout}
+              onClick={() => handleOpenTab('options')}
+              mt='20px'
+              p='5px 10px'
+              disabled={shouldLoadGame}
+            >
+              <Text.Heading2>Options</Text.Heading2>
+            </Button>
+
+            <Button
+              onClick={() => handleOpenTab('about')}
               mt='20px'
               p='5px 10px'
               disabled={shouldLoadGame}
