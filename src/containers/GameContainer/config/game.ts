@@ -89,7 +89,7 @@ export const initGame = async (
         handlePlayerYProgress(playerYProgress);
       },
       onAfterInit: (game: any) => {
-        game.audioPlayer.preload('main', music.MainTheme, { loop: true });
+        game.audioPlayer.preload('main', music.MainTheme, { loop: true, volume: 0.4 });
       },
       onLoadGame: (game: any) => {
         game.startGame();

@@ -1,2 +1,2 @@
-export { default as MainTheme } from './Pixel-Quirk.mp3';
-export { default as SpaceTheme } from './8-Bit-Perplexion.mp3';
+export { default as MainTheme } from './8-Bit-Techno.mp3';
+export { default as SpaceTheme } from './The-8-Bit-Digger.mp3';

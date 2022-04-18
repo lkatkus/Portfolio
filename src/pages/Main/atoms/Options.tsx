@@ -35,11 +35,11 @@ const Options: React.FC<any> = ({ options, onOptionsChange }) => {
             <Grid.Box width={1} mb='20px'>
               <Text.Heading2 mb='10px'>Audio</Text.Heading2>
 
-              <Grid.Container>
-                <Grid.Box width={[0.8, 0.9]}>
+              <Grid.Container alignItems='center'>
+                <Grid.Box flex={1}>
                   <Text.Body>Music</Text.Body>
                 </Grid.Box>
-                <Grid.Box width={[0.2, 0.1]}>
+                <Grid.Box>
                   <Button
                     onClick={() =>
                       handleAudioOptionChange({

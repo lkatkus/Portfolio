@@ -44,7 +44,7 @@ const Modal: React.FC<ModalProps> = ({ children, closeModal, onClose }) => (
       width={[0.9, 0.8, 0.6, 'auto']}
     >
       <Grid.Container justifyContent='flex-end'>
-        <Grid.Box position='absolute' top={'8px'} right={'8px'}>
+        <Grid.Box position='absolute' top={'13px'} right={'13px'}>
           <Button
             p={'5px'}
             variant='icon'

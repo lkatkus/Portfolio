@@ -36,7 +36,7 @@ const variant = ({ variant }: any) => {
     default:
       return `
         background: #fff;
-        ${getPixelBorder('black')}
+        ${getPixelBorder('white')}
 
         &:hover {
           color: white;
