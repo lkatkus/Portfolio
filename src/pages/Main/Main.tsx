@@ -15,6 +15,16 @@ const Main: React.FC = () => {
 
   return (
     <PageContainer
+      isSoundOn={gameOptions.audio.music.on}
+      handleSoundToggle={() =>
+        setGameOptions({
+          ...gameOptions,
+          audio: {
+            music: { on: !gameOptions.audio.music.on },
+            sfx: { on: !gameOptions.audio.sfx.on },
+          },
+        })
+      }
       menuConfig={[
         { key: 'profile', label: 'Profile', content: Profile },
         { key: 'skills', label: 'Skills', content: Skills },
