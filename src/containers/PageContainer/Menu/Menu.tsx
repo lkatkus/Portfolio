@@ -9,10 +9,11 @@ interface MenuProps {
 
 const Menu: React.FC<MenuProps> = ({ config, openTab }) => (
   <React.Fragment>
-    {config.map((option) => (
+    {config.map((option, i) => (
       <Button
         key={option.key}
-        padding='10px'
+        p='5px 10px'
+        mt={i > 0 ? '15px' : 0}
         onClick={() => openTab(option.key)}
       >
         <Text.Heading2>{option.label}</Text.Heading2>

@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 import { AnimatedText, Button, Grid, Text } from 'components';
+import { getPixelBorder } from 'utils/style';
 import { Curtain } from './atoms';
 
 const TitleScreenWrapper = styled(Grid.Container)`
@@ -22,10 +23,8 @@ const TitleScreenWrapper = styled(Grid.Container)`
 
 const TitleWrapper = styled(Grid.Container)`
   background-color: white;
-  border: 1px solid black;
-  -webkit-box-shadow: 10px 10px 0px 0px rgba(0, 0, 0, 0.4);
-  -moz-box-shadow: 10px 10px 0px 0px rgba(0, 0, 0, 0.4);
-  box-shadow: 10px 10px 0px 0px rgba(0, 0, 0, 0.4);
+
+  ${getPixelBorder('black')}
 `;
 
 interface TitleScreenProps {
@@ -70,12 +69,12 @@ const TitleScreen: React.FC<TitleScreenProps> = ({
           justifyContent='center'
         >
           <TitleWrapper
-            p={'40px'}
+            p={['20px', '40px']}
             flexDirection='column'
             alignItems='center'
             justifyContent='center'
           >
-            <Grid.Box p={['10px', '20px 20px 0']}>
+            <Grid.Box p={['10px', '0 20px']}>
               <Text.Heading1 textAlign='center'>
                 <div>My Super</div>
                 <div>
@@ -85,29 +84,37 @@ const TitleScreen: React.FC<TitleScreenProps> = ({
               </Text.Heading1>
             </Grid.Box>
 
-            <Button onClick={handleLoadGame} mt='20px' p='5px 10px'>
-              <Text.Heading2>
-                {!shouldLoadGame ? 'Start game' : 'Loading...'}
-              </Text.Heading2>
-            </Button>
+            <Grid.Container flexDirection='column'>
+              <Button
+                onClick={() => {
+                  if (!shouldLoadGame) {
+                    handleLoadGame();
+                  }
+                }}
+                mt='40px'
+                p='5px 20px'
+              >
+                <Text.Heading2>
+                  {!shouldLoadGame ? 'Start game' : 'Loading...'}
+                </Text.Heading2>
+              </Button>
 
-            <Button
-              onClick={() => handleOpenTab('options')}
-              mt='20px'
-              p='5px 10px'
-              disabled={shouldLoadGame}
-            >
-              <Text.Heading2>Options</Text.Heading2>
-            </Button>
+              <Button
+                onClick={() => handleOpenTab('options')}
+                mt='15px'
+                p='5px 20px'
+              >
+                <Text.Heading2>Options</Text.Heading2>
+              </Button>
 
-            <Button
-              onClick={() => handleOpenTab('about')}
-              mt='20px'
-              p='5px 10px'
-              disabled={shouldLoadGame}
-            >
-              <Text.Heading2>About</Text.Heading2>
-            </Button>
+              <Button
+                onClick={() => handleOpenTab('about')}
+                mt='15px'
+                p='5px 20px'
+              >
+                <Text.Heading2>About</Text.Heading2>
+              </Button>
+            </Grid.Container>
           </TitleWrapper>
         </Grid.Container>
 
