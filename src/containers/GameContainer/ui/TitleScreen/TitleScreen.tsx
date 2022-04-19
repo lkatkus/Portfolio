@@ -18,7 +18,6 @@ const TitleScreenWrapper = styled(Grid.Container)`
     rgb(135, 206, 250) 100%
   );
   clip-path: url(#curtain);
-  -webkit-clip-path: url(#curtain);
 `;
 
 const TitleWrapper = styled(Grid.Container)`
