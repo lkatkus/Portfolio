@@ -1,4 +1,4 @@
-export { default as levelTileSheet } from './level-tilesheet-res.png';
+export { default as levelTileSheet } from './level-tilesheet.png';
 export { default as playerTexture } from './player-sprite.png';
 export { default as playerTextureLeveled } from './player-leveled-sprite.png';
 export { default as catTexture } from './cat-sprite.png';

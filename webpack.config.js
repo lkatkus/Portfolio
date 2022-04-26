@@ -19,6 +19,10 @@ module.exports = {
     path: path.join(__dirname, '/dist'),
     filename: 'bundle.min.js',
   },
+  devServer: {
+    host: '0.0.0.0',
+    useLocalIp: true,
+  },
   module: {
     rules: [
       {
