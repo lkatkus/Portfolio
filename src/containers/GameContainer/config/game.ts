@@ -61,7 +61,7 @@ export const initGame = async (
   new Game(
     {
       options,
-      initRenderer: () => new Renderer(ctx),
+      initRenderer: (config) => new Renderer(ctx, config),
       initAudioPlayer: () => new WebAudioPlayer(options.audio),
       level: getLevelConfig(levelTextureAsset),
       player: getPlayerConfig(playerTextureAsset),
@@ -89,7 +89,10 @@ export const initGame = async (
         handlePlayerYProgress(playerYProgress);
       },
       onAfterInit: (game: any) => {
-        game.audioPlayer.preload('main', music.MainTheme, { loop: true, volume: 0.4 });
+        game.audioPlayer.preload('main', music.MainTheme, {
+          loop: true,
+          volume: 0.4,
+        });
       },
       onLoadGame: (game: any) => {
         game.startGame();
