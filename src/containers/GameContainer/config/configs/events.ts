@@ -5,8 +5,8 @@ const getEventConfig = ({ app, game, assets }: any) => {
     return [
       {
         id: 'musicPreloadSpace',
-        row: [18, 23],
-        col: [11, 15],
+        row: [23, 28],
+        col: [18, 22],
         eventHandler: () => {
           gameApi.game.audioPlayer.preload('space', music.SpaceTheme, {
             loop: true,
@@ -18,8 +18,8 @@ const getEventConfig = ({ app, game, assets }: any) => {
       },
       {
         id: 'initialEvent',
-        row: [40, 41],
-        col: [5, 9],
+        row: [46, 47],
+        col: [12, 15],
         eventHandler: (playerRef: any) => {
           app.setEvent({
             text: 'Whoo... What is this place?',
@@ -32,8 +32,8 @@ const getEventConfig = ({ app, game, assets }: any) => {
       },
       {
         id: 'makeArchitectsGreatAgain',
-        row: [40, 41],
-        col: [14, 27],
+        row: [46, 47],
+        col: [20, 30],
         eventHandler: (playerRef: any) => {
           app.setEvent({
             text: 'I think that someone has told me that architects make great developers.',
@@ -52,22 +52,22 @@ const getEventConfig = ({ app, game, assets }: any) => {
       },
       {
         id: 'moveUp',
-        row: [40, 41],
-        col: [35, 39],
+        row: [46, 47],
+        col: [42, 44],
         eventHandler: (playerRef: any) => {
           app.setEvent({
             text: playerRef?.canFly
               ? 'WOOF! WOOF! WOOF!'
               : 'You should try climbing up. Ohh... I mean - WOOF!',
-            // image: 'dogImage',
+            image: assets.dogImage.src,
           });
         },
         onLeave: app.clearEvent,
       },
       {
         id: 'webPortfolio',
-        row: [34, 35],
-        col: [35, 38],
+        row: [40, 41],
+        col: [42, 45],
         eventHandler: (playerRef: any) => {
           app.setEvent({
             text: 'Hmmm... Not too bad! I think that I should come back later.',
@@ -84,8 +84,8 @@ const getEventConfig = ({ app, game, assets }: any) => {
       },
       {
         id: 'gitRedirect',
-        row: [34, 35],
-        col: [40, 45],
+        row: [40, 41],
+        col: [48, 50],
         eventHandler: (playerRef: any) =>
           app.setEvent({
             text: '"In case of fire - git add -A, git commit -m "FIRE!", git push origin HEAD --force"',
@@ -101,8 +101,8 @@ const getEventConfig = ({ app, game, assets }: any) => {
       },
       {
         id: 'miscPortfolio',
-        row: [34, 35],
-        col: [47, 50],
+        row: [40, 41],
+        col: [53, 57],
         eventHandler: (playerRef: any) =>
           app.setEvent({
             text: 'Autocad, Archicad, 3DS MAX, Photoshop, Illustrator, Nikon, Aperture, Bokeh and etc. Lots of fancy words, huh?',
@@ -118,8 +118,8 @@ const getEventConfig = ({ app, game, assets }: any) => {
       },
       {
         id: 'catSpeak',
-        row: [32, 33],
-        col: [13, 24],
+        row: [38, 39],
+        col: [19, 30],
         eventHandler: (playerRef: any) =>
           app.setEvent({
             text: playerRef?.canFly
@@ -131,20 +131,20 @@ const getEventConfig = ({ app, game, assets }: any) => {
       },
       {
         id: 'moonSpeak',
-        row: [0, 12],
-        col: [35, 60],
+        row: [5, 15],
+        col: [45, 65],
         eventHandler: () =>
           app.setEvent({
             text: 'Eyes up, Guardian!',
-            //  image: 'moonImage'
+            image: assets.ghostImage.src,
           }),
         onLeave: app.clearEvent,
       },
       {
         id: 'randomJoke',
-        row: [23, 24],
-        col: [25, 45],
-        eventHandler: (playerRef: any) =>
+        row: [29, 30],
+        col: [28, 40],
+        eventHandler: () =>
           app.setEvent({
             text: (() => {
               const jokes = [
@@ -155,27 +155,25 @@ const getEventConfig = ({ app, game, assets }: any) => {
                 'What do you call a cow with a twitch?... Beef jerky.',
                 'What do you call an alligator with a vest?... An investigator.',
                 'I tried to sue the airport for misplacing my luggage... I lost my case.',
-                'A girl once told me that she wanted to see my python... I only knew javascript.',
+                'A girl once told me that she wanted to see my python... I only knew JavaScript.',
                 'What do you call a dog that does magic tricks?... A labracadabrador.',
                 'Two windmills are standing in a field and one asks the other, “What kind of music do you like?”... The other says “I’m a big metal fan.”',
                 'My girlfriend and I often laugh about how competitive we are… But I laugh more.',
                 'My friend asked me to help him round up his 37 sheep... I said "40".',
-                "Chuck Norris doesn't nead a gun he just neads a bullet and someone to make him angry",
+                "Chuck Norris doesn't need a gun, he just needs a bullet and someone to make him angry.",
                 "You don't invite Chuck Norris. He invites himself.",
               ];
 
               return jokes[Math.floor(Math.random() * jokes.length)];
             })(),
-            image: playerRef?.canFly
-              ? assets.roboImage.src
-              : assets.playerImage.src,
+            image: assets.workerImage.src,
           }),
         onLeave: app.clearEvent,
       },
       {
         id: 'itsMeMario',
-        row: [29, 30],
-        col: [5, 10],
+        row: [35, 36],
+        col: [11, 16],
         eventHandler: (playerRef: any) =>
           app.setEvent({
             text: 'I think, that you need a plumber for that...',
@@ -187,8 +185,8 @@ const getEventConfig = ({ app, game, assets }: any) => {
       },
       {
         id: 'seeHome',
-        row: [18, 19],
-        col: [19, 25],
+        row: [23, 24],
+        col: [22, 30],
         eventHandler: (playerRef: any) =>
           app.setEvent({
             text: 'I can see my house, from here!',
@@ -200,8 +198,8 @@ const getEventConfig = ({ app, game, assets }: any) => {
       },
       {
         id: 'monolith',
-        row: [5, 6],
-        col: [9, 11],
+        row: [5, 10],
+        col: [15, 18],
         eventHandler: (playerRef: any) => {
           if (playerRef.canFly) {
             app.setEvent({

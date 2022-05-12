@@ -24,7 +24,7 @@ const getLayerConfig = (layers: any[], layerName: string) => {
   return mapLayerDataToLayout(data, height, width);
 };
 
-const SPAWN_MARKER = 'x';
+const SPAWN_MARKER = 400;
 const TILES_CLIMBABLE = [21, 22, 23];
 const TILES_NON_TEXTURE = [SPAWN_MARKER, -1, 0];
 const TILES_SOLID = [
@@ -33,26 +33,22 @@ const TILES_SOLID = [
   3,
   4,
   5,
-  181,
-  182,
-  183,
-  201,
-  202,
-  203,
-  204,
-  205,
-  206,
-  207,
-  208,
-  209,
-  210,
-  237,
+  52,
+  53,
+  54,
+  61,
+  62,
+  63,
+  64,
+  65,
+  66,
+  67,
+  68,
+  69,
   ...TILES_CLIMBABLE,
 ];
 
 const LEVEL_LAYOUT = getLayerConfig(LevelMap.layers, 'Stage');
-LEVEL_LAYOUT[44][15] = SPAWN_MARKER;
-
 const BACKGROUND_LAYOUT = getLayerConfig(LevelMap.layers, 'Background');
 const FOREGROUND_LAYOUT = getLayerConfig(LevelMap.layers, 'Foreground');
 
@@ -60,11 +56,11 @@ export const getConfig = (levelTextureAsset: HTMLImageElement): any => ({
   layout: LEVEL_LAYOUT,
   bgLayout: BACKGROUND_LAYOUT,
   fgLayout: FOREGROUND_LAYOUT,
-  parallaxScaling: { x: 1.2 },
+  // parallaxScaling: { x: 1 },
   spawnMarker: SPAWN_MARKER,
   tileSheet: {
     src: levelTextureAsset,
-    tilesPerRow: 15,
+    tilesPerRow: 12,
     spriteSize: levelTextureAsset.width / 20,
     cols: 20,
     types: {

@@ -5,7 +5,9 @@ export { default as catTexture } from './cat-sprite.png';
 export { default as dogTexture } from './dog-sprite.png';
 export { default as moonTexture } from './traveller-sprite.png';
 
-export { default as playerImage } from './animation-player.gif';
-export { default as catImage } from './animation-cat.gif';
-export { default as workerImage } from './animation-worker.gif';
-export { default as roboImage } from './animation-robo.gif';
+export { default as playerImage } from './portrait-player.gif';
+export { default as catImage } from './portrait-cat.gif';
+export { default as workerImage } from './portrait-worker.gif';
+export { default as roboImage } from './portrait-robo.gif';
+export { default as dogImage } from './portrait-dog.png';
+export { default as ghostImage } from './portrait-ghost.png';

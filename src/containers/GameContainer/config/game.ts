@@ -39,6 +39,9 @@ export const initGame = async (
     playerImage,
     roboImage,
     catImage,
+    dogImage,
+    workerImage,
+    ghostImage,
   ] = await Promise.all([
     loadAsset(assets.levelTileSheet),
     loadAsset(assets.playerTexture),
@@ -49,6 +52,9 @@ export const initGame = async (
     loadAsset(assets.playerImage),
     loadAsset(assets.roboImage),
     loadAsset(assets.catImage),
+    loadAsset(assets.dogImage),
+    loadAsset(assets.workerImage),
+    loadAsset(assets.ghostImage),
   ]);
 
   const Renderer =
@@ -75,7 +81,7 @@ export const initGame = async (
         {
           playerLeveledTexture: playerTextureLeveledAsset,
         },
-        { playerImage, roboImage, catImage }
+        { playerImage, roboImage, catImage, dogImage, workerImage, ghostImage }
       ),
     },
     {
