@@ -13,14 +13,14 @@ export const getConfig = (
       source: catTextureAsset,
       height: 32,
       width: 32,
-      tileCols: 3,
+      tileCols: 8,
       drawOffset: 1,
       drawWidthOffset: 2,
       drawHeightOffset: 2,
     },
     min: {
       row: 39,
-      col: 19,
+      col: 18,
     },
     max: {
       row: 39,

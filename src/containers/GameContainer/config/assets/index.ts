@@ -6,7 +6,7 @@ export { default as dogTexture } from './dog-sprite.png';
 export { default as moonTexture } from './traveller-sprite.png';
 
 export { default as playerImage } from './portrait-player.gif';
-export { default as catImage } from './portrait-cat.gif';
+export { default as catImage } from './portrait-cat-static.png';
 export { default as workerImage } from './portrait-worker.gif';
 export { default as roboImage } from './portrait-robo.gif';
 export { default as dogImage } from './portrait-dog.png';
