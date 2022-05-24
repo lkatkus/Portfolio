@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { position, PositionProps } from 'styled-system';
 
 import { Button, Icons } from 'components';
 import { useModal } from 'hooks';
@@ -14,21 +15,26 @@ const StyledPageContainer = styled('div')`
   display: flex;
 `;
 
-const ButtonWrapper = styled('div')`
+const ButtonWrapper = styled('div')<PositionProps>`
   position: absolute;
   top: 0;
-  left: 0;
   margin: 10px;
+
+  ${position}
 `;
 
 interface PageWrapperProps {
+  isSoundOn: boolean;
+  handleSoundToggle: () => void;
   children: (props: { openTab: (tab: string) => void }) => JSX.Element;
-  menuConfig: { key: string; label: string; content: React.FC }[];
+  menuConfig: { key: string; label: string; content: React.FC; props?: any }[];
 }
 
 const PageContainer: React.FC<PageWrapperProps> = ({
   children,
   menuConfig,
+  isSoundOn,
+  handleSoundToggle,
 }) => {
   const [activeTab, setActiveTab] = React.useState<string>(null);
 
@@ -58,9 +64,19 @@ const PageContainer: React.FC<PageWrapperProps> = ({
 
   return (
     <StyledPageContainer>
-      <ButtonWrapper>
-        <Button onClick={showMenu} p='5px' variant='icon'>
-          <Icons.Burger />
+      <ButtonWrapper left={0}>
+        <Button onClick={showMenu} p='10px' variant='icon'>
+          <Icons.Burger size={24} />
+        </Button>
+      </ButtonWrapper>
+
+      <ButtonWrapper right={0}>
+        <Button onClick={handleSoundToggle} p='10px' variant='icon'>
+          {isSoundOn ? (
+            <Icons.SoundOn size={24} />
+          ) : (
+            <Icons.SoundOff size={24} />
+          )}
         </Button>
       </ButtonWrapper>
 

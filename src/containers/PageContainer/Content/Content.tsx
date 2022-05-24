@@ -1,7 +1,7 @@
 import React from 'react';
 
 interface ContentContainerProps {
-  config: { key: string; label: string; content: React.FC }[];
+  config: { key: string; label: string; content: React.FC; props?: any }[];
   activeTab: string;
 }
 
@@ -9,11 +9,17 @@ const ContentContainer: React.FC<ContentContainerProps> = ({
   config,
   activeTab,
 }) => {
-  const Content = activeTab
-    ? config.find(({ key }) => key === activeTab).content
+  const contentConfig = activeTab
+    ? config.find(({ key }) => key === activeTab)
     : null;
 
-  return Content ? <Content /> : null;
+  if (contentConfig === null) {
+    return null;
+  }
+
+  const ContentComponent = contentConfig.content;
+
+  return <ContentComponent {...contentConfig.props} />;
 };
 
 export default ContentContainer;

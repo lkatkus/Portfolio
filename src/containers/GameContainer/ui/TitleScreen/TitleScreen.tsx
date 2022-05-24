@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import { Button, Grid, Text } from 'components';
-
+import { AnimatedText, Button, Grid, Text } from 'components';
+import { getPixelBorder } from 'utils/style';
 import { Curtain } from './atoms';
 
 const TitleScreenWrapper = styled(Grid.Container)`
@@ -12,24 +12,30 @@ const TitleScreenWrapper = styled(Grid.Container)`
   width: 100%;
   height: 100%;
   z-index: 2;
+  background: linear-gradient(
+    90deg,
+    rgb(255, 255, 255) 0%,
+    rgb(135, 206, 250) 100%
+  );
+  clip-path: url(#curtain);
 `;
 
 const TitleWrapper = styled(Grid.Container)`
   background-color: white;
-  border: 1px solid black;
-  -webkit-box-shadow: 10px 10px 0px 0px rgba(0, 0, 0, 0.4);
-  -moz-box-shadow: 10px 10px 0px 0px rgba(0, 0, 0, 0.4);
-  box-shadow: 10px 10px 0px 0px rgba(0, 0, 0, 0.4);
+
+  ${getPixelBorder('black')}
 `;
 
 interface TitleScreenProps {
   gameLoaded: boolean;
   shouldLoadGame: boolean;
-  loadGame: () => void;
+  handleLoadGame: () => void;
+  handleOpenTab: (tab: string) => void;
 }
 
 const TitleScreen: React.FC<TitleScreenProps> = ({
-  loadGame,
+  handleLoadGame,
+  handleOpenTab,
   gameLoaded,
   shouldLoadGame,
 }) => {
@@ -47,6 +53,8 @@ const TitleScreen: React.FC<TitleScreenProps> = ({
 
   return !animationFinished ? (
     <React.Fragment>
+      <Curtain curtainId='curtain' ref={animationRef} />
+
       <TitleScreenWrapper
         p='40px 20px'
         flexDirection='column'
@@ -60,38 +68,59 @@ const TitleScreen: React.FC<TitleScreenProps> = ({
           justifyContent='center'
         >
           <TitleWrapper
-            p='40px 20px'
+            p={['20px', '40px']}
             flexDirection='column'
             alignItems='center'
             justifyContent='center'
           >
-            <Text.Heading1 mb='20px' textAlign='center'>
-              My Super Javascript Adventure
-            </Text.Heading1>
-
-            <Grid.Box mb='20px'>
-              <Text.Body mb='10px' textAlign='center'>
-                Use arrow keys or swipe to move
-              </Text.Body>
-              <Text.Body textAlign='center'>
-                View in landscape mode for best look
-              </Text.Body>
+            <Grid.Box p={['10px', '0 20px']}>
+              <Text.Heading1 textAlign='center'>
+                <div>My Super</div>
+                <div>
+                  <AnimatedText text='Javascript' />
+                </div>
+                <div>Adventure</div>
+              </Text.Heading1>
             </Grid.Box>
 
-            <Button onClick={loadGame} mt='20px' p='5px 10px'>
-              <Text.Heading2>
-                {!shouldLoadGame ? 'Start game' : 'Loading...'}
-              </Text.Heading2>
-            </Button>
+            <Grid.Container flexDirection='column'>
+              <Button
+                onClick={() => {
+                  if (!shouldLoadGame) {
+                    handleLoadGame();
+                  }
+                }}
+                mt='40px'
+                p='5px 20px'
+              >
+                <Text.Heading2>
+                  {!shouldLoadGame ? 'Start game' : 'Loading...'}
+                </Text.Heading2>
+              </Button>
+
+              <Button
+                onClick={() => handleOpenTab('options')}
+                mt='15px'
+                p='5px 20px'
+              >
+                <Text.Heading2>Options</Text.Heading2>
+              </Button>
+
+              <Button
+                onClick={() => handleOpenTab('about')}
+                mt='15px'
+                p='5px 20px'
+              >
+                <Text.Heading2>About</Text.Heading2>
+              </Button>
+            </Grid.Container>
           </TitleWrapper>
         </Grid.Container>
 
         <Text.SubBody>
-          © 2020 Laimonas Katkus. All rights reserved.
+          © {new Date().getFullYear()} Laimonas Katkus. All rights reserved.
         </Text.SubBody>
       </TitleScreenWrapper>
-
-      <Curtain ref={animationRef} />
     </React.Fragment>
   ) : null;
 };

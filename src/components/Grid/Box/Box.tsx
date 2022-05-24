@@ -1,6 +1,13 @@
 import { Box, BoxProps } from '@rebass/grid';
 import styled from 'styled-components';
-import { border, BorderProps } from 'styled-system';
+import {
+  border,
+  BorderProps,
+  position,
+  PositionProps,
+  layout,
+  LayoutProps,
+} from 'styled-system';
 
 const getHiddenQuery = (hide) => {
   let result = ``;
@@ -49,7 +56,11 @@ interface Props {
   hide?: boolean[];
 }
 
-export default styled<React.FC<Props & BoxProps & BorderProps>>(Box)`
+export default styled<
+  React.FC<Props & BoxProps & BorderProps & PositionProps & LayoutProps>
+>(Box)`
   ${({ hide }) => (hide ? getHiddenQuery(hide) : undefined)}
   ${border}
+  ${position}
+  ${layout}
 `;

@@ -1,68 +1,93 @@
 import React from 'react';
 
-import { Grid, Text, SkillzBox } from 'components';
-// import Player from 'assets/images/animation-player.gif';
+import { Button, Icons, Grid, Text } from 'components';
 
 const About: React.FC = () => (
   <Grid.Container flexWrap='wrap'>
-    {/* <Grid.Box width={[1, 1, 1 / 3]} hide={[true, true]}>
-      <img style={{ width: '100%' }} src={Player} />
-    </Grid.Box> */}
-
     <Grid.Box width={1}>
       <Grid.Container flexWrap='wrap'>
         <Grid.Box width={1} mb='20px'>
-          <Text.Heading2 mb='10px'>Laimonas Katkus</Text.Heading2>
-          <Text.Body>Class - Software developer</Text.Body>
-          <Text.Body>Race - Human</Text.Body>
-          <Text.Body>Location - Lithuania, Vilnius</Text.Body>
-          <Text.Body>Superpower - Brazilian Jiu-Jitsu blue belt</Text.Body>
+          <Text.Heading2 mb='10px'>About</Text.Heading2>
+          <Text.Body mb='10px'>
+            This is my personal world created with JavaScript. This is meant to
+            be a learning project to be shared with friends and colleagues.
+          </Text.Body>
+          <Text.Body mb='10px'>
+            The site was built using React and the game itself is handled by my
+            personal game engine - LaikaJS. Rendering can be handle with both
+            Canvas 2d or WebGl if it is supported. Assets were drawn by me using
+            Aseprite editor.
+          </Text.Body>
         </Grid.Box>
 
         <Grid.Box width={1} mb='20px'>
-          <Text.Heading2 mb='10px'>Stats</Text.Heading2>
-          <Grid.Container flexWrap='wrap' mb='5px'>
-            <Grid.Box width={[0.2, 0.1]}>
-              <Text.Body>HP</Text.Body>
+          <Text.Heading2 mb='10px'>Mobile App</Text.Heading2>
+          <Grid.Container>
+            <Grid.Box width={0.7}>
+              <Text.Body mb='10px'>
+                Through the power of React Native, this world is also available
+                on mobile. Currently only on Android, but you never know. Check
+                out the Github repo of download the app.
+              </Text.Body>
             </Grid.Box>
-            <Grid.Box width={[0.8, 0.9]}>
-              <SkillzBox color='crimson' />
-            </Grid.Box>
-          </Grid.Container>
-
-          <Grid.Container flexWrap='wrap' mb='5px'>
-            <Grid.Box width={[0.2, 0.1]}>
-              <Text.Body>MP</Text.Body>
-            </Grid.Box>
-            <Grid.Box width={[0.8, 0.9]}>
-              <SkillzBox color='navy' />
-            </Grid.Box>
-          </Grid.Container>
-
-          <Grid.Container flexWrap='wrap' mb='5px'>
-            <Grid.Box width={[0.2, 0.1]}>
-              <Text.Body>EXP</Text.Body>
-            </Grid.Box>
-            <Grid.Box width={[0.8, 0.9]}>
-              <SkillzBox color='gold' />
+            <Grid.Box width={0.3}>
+              <Grid.Container
+                height='100%'
+                alignItems='center'
+                justifyContent='center'
+                flexWrap='wrap'
+              >
+                <Button
+                  mx='20px'
+                  variant='icon'
+                  onClick={() => {
+                    window.open(
+                      'https://github.com/lkatkus/PortfolioNative',
+                      '_blank'
+                    );
+                  }}
+                >
+                  <Icons.Github size={40} />
+                </Button>
+                <Button
+                  mx='20px'
+                  variant='icon'
+                  onClick={() => {
+                    window.open(
+                      'https://play.google.com/store/apps/details?id=eu.katkus.MySuperJavaScriptAdventure',
+                      '_blank'
+                    );
+                  }}
+                >
+                  <Icons.GooglePlay size={40} />
+                </Button>
+              </Grid.Container>
             </Grid.Box>
           </Grid.Container>
         </Grid.Box>
 
         <Grid.Box width={1} mb='20px'>
-          <Text.Heading2 mb='10px'>Origins</Text.Heading2>
+          <Text.Heading2 mb='10px'>Music & SFX</Text.Heading2>
           <Text.Body mb='10px'>
-            Architect (building kind) and project manager by education. I have
-            worked on multiple real estate projects of many different scales in
-            many different roles - from architect to project manager on both
-            contractors and clients side.
+            Music by Eric Matyas{' '}
+            <Text.Link
+              href='https://www.soundimage.org/'
+              target='_blank'
+              rel='noreferrer'
+            >
+              www.soundimage.org
+            </Text.Link>
           </Text.Body>
           <Text.Body mb='10px'>
-            Even though, IT and tech stuff in general was in my life from early
-            age, the decision to move to IT, was not an easy one. Right now I am
-            glad, that I have followed my gut.
+            Sound effects from{' '}
+            <Text.Link
+              href='https://www.zapsplat.com'
+              target='_blank'
+              rel='noreferrer'
+            >
+              www.zapsplat.com
+            </Text.Link>
           </Text.Body>
-          <Text.Body>To be continued...</Text.Body>
         </Grid.Box>
       </Grid.Container>
     </Grid.Box>

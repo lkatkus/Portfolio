@@ -16,9 +16,11 @@
       "containers/*": ["containers/*"],
       "pages/*": ["pages/*"],
       "assets/*": ["assets/*"],
-      "hooks/*": ["hooks/*"]
+      "hooks/*": ["hooks/*"],
+      "utils/*": ["utils/*"]
     },
-    "typeRoots": ["./src/types"]
+    "typeRoots": ["./src/types"],
+    "resolveJsonModule": true,
   },
   "awesomeTypescriptLoaderOptions": {
     "useBabel": true,

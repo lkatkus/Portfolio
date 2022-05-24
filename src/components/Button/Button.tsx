@@ -1,5 +1,7 @@
 import styled from 'styled-components';
-import { space, SpaceProps } from 'styled-system';
+import { space, SpaceProps, width, WidthProps } from 'styled-system';
+
+import { getPixelBorder } from 'utils/style';
 
 interface ButtonProps {
   variant?: string;
@@ -19,29 +21,46 @@ const variant = ({ variant }: any) => {
           }
         }
       `;
+    case 'secondary':
+      return `
+        color: white;
+        background-color: rgba(0, 0, 0, 0.5);
+        ${getPixelBorder('white')}
+
+        &:hover {
+          color: white;
+          background-color: #e91e63;
+          ${getPixelBorder('%23e91e63')}
+        }
+      `;
     default:
       return `
-        background: rgba(255, 255, 255, 0.6);
-  
+        background: #fff;
+        ${getPixelBorder('white')}
+
         &:hover {
-          background-color: rgba(240, 245, 245, 1);
+          color: white;
+          background-color: #e91e63;
+          ${getPixelBorder('%23e91e63')}
         }
       `;
   }
-
-  return '';
 };
 
-export default styled.button<ButtonProps & SpaceProps>`
+export default styled.button<ButtonProps & SpaceProps & WidthProps>`
   padding: 0;
   border: none;
   outline: none;
   background: none;
   display: inline-flex;
+  justify-content: center;
+  align-items: center;
   cursor: pointer;
-  transition: all;
-  transition-duration: 200ms;
+  transition: background-color;
+  transition-duration: 50ms;
+  position: relative;
 
   ${variant}
   ${space}
+  ${width}
 `;

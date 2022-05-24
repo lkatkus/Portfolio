@@ -12,11 +12,16 @@ module.exports = {
       pages: path.resolve(__dirname, 'src/pages/'),
       assets: path.resolve(__dirname, 'src/assets/'),
       hooks: path.resolve(__dirname, 'src/hooks/'),
+      utils: path.resolve(__dirname, 'src/utils/'),
     },
   },
   output: {
     path: path.join(__dirname, '/dist'),
     filename: 'bundle.min.js',
+  },
+  devServer: {
+    host: '0.0.0.0',
+    useLocalIp: true,
   },
   module: {
     rules: [
@@ -26,7 +31,7 @@ module.exports = {
         exclude: /node_modules/,
       },
       {
-        test: /\.(png|svg|jpg|gif|ttf)$/,
+        test: /\.(png|svg|jpg|gif|ttf|mp3)$/,
         use: ['file-loader'],
       },
     ],
@@ -34,6 +39,7 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       template: './public/index.html',
+      favicon: './public/favicon.ico',
     }),
   ],
 };

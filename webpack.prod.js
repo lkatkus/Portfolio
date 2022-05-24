@@ -1,6 +1,8 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
+const CompressionPlugin = require('compression-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 module.exports = {
   mode: 'production',
@@ -13,6 +15,7 @@ module.exports = {
       pages: path.resolve(__dirname, 'src/pages/'),
       assets: path.resolve(__dirname, 'src/assets/'),
       hooks: path.resolve(__dirname, 'src/hooks/'),
+      utils: path.resolve(__dirname, 'src/utils/'),
     },
   },
   output: {
@@ -27,7 +30,7 @@ module.exports = {
         exclude: /node_modules/,
       },
       {
-        test: /\.(png|svg|jpg|gif|ttf)$/,
+        test: /\.(png|svg|jpg|gif|ttf|mp3)$/,
         use: [
           {
             loader: 'file-loader',
@@ -59,6 +62,9 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       template: './public/index.html',
+      favicon: './public/favicon.ico',
     }),
+    new CompressionPlugin(),
+    new CleanWebpackPlugin(),
   ],
 };
