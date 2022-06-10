@@ -30,18 +30,19 @@ const variant = ({ variant }: any) => {
         &:hover {
           color: white;
           background-color: #e91e63;
-          ${getPixelBorder('%23e91e63')}
+          ${getPixelBorder('%23ec427c')}
         }
       `;
     default:
       return `
-        background: #fff;
-        ${getPixelBorder('white')}
+        color: white;
+        background-color: #e91e63;
+        ${getPixelBorder('%23ec427c')}
 
         &:hover {
           color: white;
-          background-color: #e91e63;
-          ${getPixelBorder('%23e91e63')}
+          background-color: #ba124b;
+          ${getPixelBorder('%23a81044')}
         }
       `;
   }

@@ -24,7 +24,6 @@ const TextBox: React.FC<GameTextBoxProps> = ({ event }) =>
         {event.onClick && (
           <Grid.Box alignSelf='flex-end'>
             <Button
-              variant='secondary'
               mt='20px'
               p='5px 10px'
               onClick={event.onClick.clickHandler}
