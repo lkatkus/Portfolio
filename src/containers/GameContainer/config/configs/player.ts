@@ -1,4 +1,8 @@
-export const getConfig = (playerTextureAsset: HTMLImageElement): any => ({
+import { IPlayerConfig } from 'laikajs';
+
+export const getConfig = (
+  playerTextureAsset: HTMLImageElement
+): IPlayerConfig => ({
   name: 'player',
   movement: {
     speedX: 0.18,

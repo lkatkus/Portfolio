@@ -1,8 +1,10 @@
+import { INpcConfig } from 'laikajs';
+
 export const getConfig = (
   catTextureAsset: HTMLImageElement,
   moonTextureAsset: HTMLImageElement,
   dogTextureAsset: HTMLImageElement
-): any => [
+): INpcConfig[] => [
   {
     name: 'cat',
     movement: {

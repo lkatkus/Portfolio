@@ -6,6 +6,7 @@ import { getConfig as getPlayerConfig } from './configs/player';
 import { getConfig as getLevelConfig } from './configs/level';
 import { getConfig as getEventsConfig } from './configs/events';
 import { getConfig as getNpcConfig } from './configs/npc';
+import { IWebAudioPlayerOptions } from 'laikajs/lib/src/AudioPlayers';
 
 const loadAsset = (src): Promise<HTMLImageElement> => {
   return new Promise((res) => {
@@ -19,7 +20,7 @@ const loadAsset = (src): Promise<HTMLImageElement> => {
 };
 
 export const initGame = async (
-  ctx: RenderingContext,
+  ctx: WebGLRenderingContext | CanvasRenderingContext2D,
   {
     options,
     handleGameReady,
@@ -27,8 +28,17 @@ export const initGame = async (
     handleOpenPage,
     handleSetEvent,
     handlePlayerYProgress,
-  }: any
-): Promise<any> => {
+  }: {
+    options: {
+      audio: IWebAudioPlayerOptions;
+    };
+    handleGameReady: (game: Game) => void;
+    handleOpenTab: (tab: string) => void;
+    handleOpenPage: (page: string) => void;
+    handleSetEvent: (event: any) => void;
+    handlePlayerYProgress: (progress: number) => void;
+  }
+): Promise<void> => {
   const [
     levelTextureAsset,
     playerTextureAsset,
@@ -57,17 +67,19 @@ export const initGame = async (
     loadAsset(assets.ghostImage),
   ]);
 
-  const Renderer =
-    ctx instanceof WebGLRenderingContext ? WebGlRenderer : CanvasRenderer;
-
   if (ctx instanceof CanvasRenderingContext2D) {
     ctx.imageSmoothingEnabled = false;
   }
 
   new Game(
     {
-      options,
-      initRenderer: (config) => new Renderer(ctx, config),
+      initRenderer: (config) => {
+        if (ctx instanceof WebGLRenderingContext) {
+          return new WebGlRenderer(ctx, config);
+        }
+
+        return new CanvasRenderer(ctx, config);
+      },
       initAudioPlayer: () => new WebAudioPlayer(options.audio),
       level: getLevelConfig(levelTextureAsset),
       player: getPlayerConfig(playerTextureAsset),
@@ -79,28 +91,34 @@ export const initGame = async (
           setEvent: handleSetEvent,
         },
         {
+          playerImage,
+          roboImage,
+          catImage,
+          dogImage,
+          workerImage,
+          ghostImage,
           playerLeveledTexture: playerTextureLeveledAsset,
-        },
-        { playerImage, roboImage, catImage, dogImage, workerImage, ghostImage }
+        }
       ),
     },
     {
-      onDraw: (game: any) => {
+      onDraw: (game) => {
         const worldHeight = game.level.levelLayout.y;
         const playerY = game.player.y;
-        const playerYProgress = Number(
-          (worldHeight - playerY) / worldHeight
+        const playerYProgress = (
+          (worldHeight - playerY) /
+          worldHeight
         ).toPrecision(2);
 
-        handlePlayerYProgress(playerYProgress);
+        handlePlayerYProgress(Number(playerYProgress));
       },
-      onAfterInit: (game: any) => {
+      onAfterInit: (game) => {
         game.audioPlayer.preload('main', music.MainTheme, {
           loop: true,
           volume: 0.4,
         });
       },
-      onLoadGame: (game: any) => {
+      onLoadGame: (game) => {
         game.startGame();
         game.audioPlayer.play('main');
 

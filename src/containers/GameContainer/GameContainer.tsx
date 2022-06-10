@@ -62,6 +62,10 @@ const GameContainer: React.FC<GameWrapperProps> = ({ onOpenTab, options }) => {
         depth: false,
       });
 
+      if (!ctx) {
+        throw new Error('Not supported browser');
+      }
+
       initGame(ctx, {
         options,
         handlePlayerYProgress: (progress: number) => {
@@ -82,8 +86,8 @@ const GameContainer: React.FC<GameWrapperProps> = ({ onOpenTab, options }) => {
         handleOpenPage: (pageUrl: string) => {
           window.open(pageUrl, '_blank').focus();
         },
-        handleSetEvent: (eventData: any) => {
-          setActiveEvent(eventData);
+        handleSetEvent: (event: any) => {
+          setActiveEvent(event);
         },
       });
     }

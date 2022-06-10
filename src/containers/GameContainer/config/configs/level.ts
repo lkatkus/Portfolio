@@ -1,3 +1,5 @@
+import { ILevelManagerConfig } from 'laikajs';
+
 import * as LevelMap from './level-map.json';
 
 const mapLayerDataToLayout = (data: any[], height: number, width: number) => {
@@ -52,10 +54,12 @@ const LEVEL_LAYOUT = getLayerConfig(LevelMap.layers, 'Stage');
 const BACKGROUND_LAYOUT = getLayerConfig(LevelMap.layers, 'Background');
 const FOREGROUND_LAYOUT = getLayerConfig(LevelMap.layers, 'Foreground');
 
-export const getConfig = (levelTextureAsset: HTMLImageElement): any => ({
-  layout: LEVEL_LAYOUT,
-  bgLayout: BACKGROUND_LAYOUT,
-  fgLayout: FOREGROUND_LAYOUT,
+export const getConfig = (
+  levelTextureAsset: HTMLImageElement
+): ILevelManagerConfig => ({
+  stageLayout: LEVEL_LAYOUT,
+  backgroundLayout: BACKGROUND_LAYOUT,
+  foregroundLayout: FOREGROUND_LAYOUT,
   // parallaxScaling: { x: 1 },
   spawnMarker: SPAWN_MARKER,
   tileSheet: {

@@ -1,11 +1,18 @@
 export const getCanvasContext = (
   canvas: HTMLCanvasElement,
-  options: any
-): RenderingContext => {
+  options: { antialias: boolean; depth: boolean }
+): WebGLRenderingContext | CanvasRenderingContext2D | null => {
   const ctx =
     canvas.getContext('webgl', options) ||
     canvas.getContext('experimental-webgl', options) ||
     canvas.getContext('2d', options);
 
-  return ctx;
+  if (
+    ctx instanceof WebGLRenderingContext ||
+    ctx instanceof CanvasRenderingContext2D
+  ) {
+    return ctx;
+  }
+
+  return;
 };
