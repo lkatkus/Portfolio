@@ -1,4 +1,4 @@
-import { Game, WebGlRenderer, CanvasRenderer, WebAudioPlayer } from 'laikajs';
+import { Game, WebGlRenderer, CanvasRenderer, AudioPlayer } from 'laikajs';
 
 import * as assets from './assets';
 import { music } from './audio';
@@ -6,7 +6,7 @@ import { getConfig as getPlayerConfig } from './configs/player';
 import { getConfig as getLevelConfig } from './configs/level';
 import { getConfig as getEventsConfig } from './configs/events';
 import { getConfig as getNpcConfig } from './configs/npc';
-import { IWebAudioPlayerOptions } from 'laikajs/lib/src/AudioPlayers';
+import { IAudioPlayerOptions } from 'laikajs/lib/src/AudioPlayers';
 
 const loadAsset = (src): Promise<HTMLImageElement> => {
   return new Promise((res) => {
@@ -30,7 +30,7 @@ export const initGame = async (
     handlePlayerYProgress,
   }: {
     options: {
-      audio: IWebAudioPlayerOptions;
+      audio: IAudioPlayerOptions;
     };
     handleGameReady: (game: Game) => void;
     handleOpenTab: (tab: string) => void;
@@ -80,7 +80,7 @@ export const initGame = async (
 
         return new CanvasRenderer(ctx, config);
       },
-      initAudioPlayer: () => new WebAudioPlayer(options.audio),
+      initAudioPlayer: () => new AudioPlayer(Audio, options.audio),
       level: getLevelConfig(levelTextureAsset),
       player: getPlayerConfig(playerTextureAsset),
       npc: getNpcConfig(catTextureAsset, moonTextureAsset, dogTextureAsset),
