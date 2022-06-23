@@ -26,6 +26,8 @@ const getColorDiff = (start: IColor, end: IColor, offset: number) => {
   });
 };
 
+const START_ROW = 24;
+const END_ROW = 17;
 const COLOR_TOP_START: IColor = [135, 206, 250];
 const COLOR_TOP_END: IColor = [26, 26, 30];
 const COLOR_BOTTOM_START: IColor = [255, 255, 255];
@@ -124,15 +126,13 @@ export const initGame = async (
     },
     {
       onDraw: (game) => {
-        const TRANSITION_START_Y = 1550;
-        const TRANSITION_END_Y = 550;
-
         let offset = 0;
 
-        if (game.player.y < TRANSITION_START_Y) {
-          const diff =
-            (TRANSITION_START_Y - game.player.y) /
-            (TRANSITION_START_Y - TRANSITION_END_Y);
+        const START_Y = START_ROW * game.level.tileSize;
+        const END_Y = END_ROW * game.level.tileSize;
+
+        if (game.player.row < START_ROW) {
+          const diff = (START_Y - game.player.y) / (START_Y - END_Y);
 
           offset = diff > 1 ? 1 : Number(diff.toPrecision(2));
         }
