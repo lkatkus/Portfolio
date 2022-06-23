@@ -10,27 +10,6 @@ const StyledCanvas = styled('canvas')`
   height: 100%;
 `;
 
-const Background = styled('div')`
-  z-index: -1;
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  background: rgb(255, 255, 255);
-  background: linear-gradient(
-    45deg,
-    rgba(255, 255, 255, 1) 0%,
-    rgba(135, 206, 250, 1) 100%
-  );
-`;
-
-const DimBackground = styled('div')`
-  z-index: -1;
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  background: linear-gradient(10deg, #324c76 0%, #1a1a1e 100%);
-`;
-
 interface GameWrapperProps {
   onOpenTab: (tab: string) => void;
   options: { audio: { music: { on: boolean }; sfx: { on: boolean } } };
@@ -53,7 +32,6 @@ const GameContainer: React.FC<GameWrapperProps> = ({ onOpenTab, options }) => {
   const [shouldLoadGame, setShouldLoadGame] = React.useState(false);
   const [activeEvent, setActiveEvent] = React.useState<Event>(null);
   const [moveState, setMoveState] = React.useState<any>(null);
-  const [dim, setDim] = React.useState<number>(0);
 
   React.useEffect(() => {
     if (shouldLoadGame && canvasRef) {
@@ -68,14 +46,6 @@ const GameContainer: React.FC<GameWrapperProps> = ({ onOpenTab, options }) => {
 
       initGame(ctx, {
         options,
-        handlePlayerYProgress: (progress: number) => {
-          if (progress > 0.55) {
-            const dimming = (progress - 0.55) * 5;
-            setDim(dimming > 1 ? 1 : dimming);
-          } else {
-            setDim(0);
-          }
-        },
         handleGameReady: (game) => {
           setGame(game);
           setGameLoaded(true);
@@ -121,9 +91,6 @@ const GameContainer: React.FC<GameWrapperProps> = ({ onOpenTab, options }) => {
         handleLoadGame={() => setShouldLoadGame(true)}
         handleOpenTab={onOpenTab}
       />
-
-      <Background />
-      <DimBackground style={{ opacity: dim }} />
 
       <ControlsProvider isLoaded={gameLoaded} handleStateChange={setMoveState}>
         <StyledCanvas

@@ -1,4 +1,10 @@
-import { Game, WebGlRenderer, CanvasRenderer, AudioPlayer } from 'laikajs';
+import {
+  Game,
+  WebGlRenderer,
+  CanvasRenderer,
+  AudioPlayer,
+  IColor,
+} from 'laikajs';
 
 import * as assets from './assets';
 import { music } from './audio';
@@ -7,6 +13,23 @@ import { getConfig as getLevelConfig } from './configs/level';
 import { getConfig as getEventsConfig } from './configs/events';
 import { getConfig as getNpcConfig } from './configs/npc';
 import { IAudioPlayerOptions } from 'laikajs/lib/src/AudioPlayers';
+
+const getDiff = (start: number, end: number, offset: number) => {
+  const diff = (start - end) * offset;
+
+  return start - diff;
+};
+
+const getColorDiff = (start: IColor, end: IColor, offset: number) => {
+  return start.map((c1, i) => {
+    return getDiff(c1, end[i], offset);
+  });
+};
+
+const COLOR_TOP_START: IColor = [135, 206, 250];
+const COLOR_TOP_END: IColor = [26, 26, 30];
+const COLOR_BOTTOM_START: IColor = [255, 255, 255];
+const COLOR_BOTTOM_END: IColor = [50, 76, 118];
 
 const loadAsset = (src): Promise<HTMLImageElement> => {
   return new Promise((res) => {
@@ -27,7 +50,6 @@ export const initGame = async (
     handleOpenTab,
     handleOpenPage,
     handleSetEvent,
-    handlePlayerYProgress,
   }: {
     options: {
       audio: IAudioPlayerOptions;
@@ -36,7 +58,6 @@ export const initGame = async (
     handleOpenTab: (tab: string) => void;
     handleOpenPage: (page: string) => void;
     handleSetEvent: (event: any) => void;
-    handlePlayerYProgress: (progress: number) => void;
   }
 ): Promise<void> => {
   const [
@@ -103,14 +124,33 @@ export const initGame = async (
     },
     {
       onDraw: (game) => {
-        const worldHeight = game.level.levelLayout.y;
-        const playerY = game.player.y;
-        const playerYProgress = (
-          (worldHeight - playerY) /
-          worldHeight
-        ).toPrecision(2);
+        const TRANSITION_START_Y = 1550;
+        const TRANSITION_END_Y = 550;
 
-        handlePlayerYProgress(Number(playerYProgress));
+        let offset = 0;
+
+        if (game.player.y < TRANSITION_START_Y) {
+          const diff =
+            (TRANSITION_START_Y - game.player.y) /
+            (TRANSITION_START_Y - TRANSITION_END_Y);
+
+          offset = diff > 1 ? 1 : Number(diff.toPrecision(2));
+        }
+
+        const colorTop = getColorDiff(COLOR_TOP_START, COLOR_TOP_END, offset);
+        const colorBottom = getColorDiff(
+          COLOR_BOTTOM_START,
+          COLOR_BOTTOM_END,
+          offset
+        );
+
+        const normalizedColorTop = colorTop.map((c) => c / 255) as IColor;
+        const normalizedColorBottom = colorBottom.map((c) => c / 255) as IColor;
+
+        game.renderer.skyRenderer.bgColor = {
+          type: 'gradient',
+          color: [normalizedColorTop, normalizedColorBottom],
+        };
       },
       onAfterInit: (game) => {
         game.audioPlayer.preload('main', music.MainTheme, {
